@@ -14,32 +14,25 @@ anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource("1_3xy6f")
 
-[node name="HUDContainer" type="MarginContainer" parent="."]
+[node name="MetersContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = 0
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_right = 220.0
-offset_bottom = 80.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HUDContainer"]
-layout_mode = 2
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 210.0
+offset_bottom = 110.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_constants/separation = 15
 
-[node name="RageMeter" parent="HUDContainer/VBoxContainer" instance=ExtResource("2_rage")]
+[node name="RageMeter" parent="MetersContainer" instance=ExtResource("2_rage")]
 layout_mode = 2
 
-[node name="ReservoirMeter" parent="HUDContainer/VBoxContainer" instance=ExtResource("3_reservoir")]
+[node name="ReservoirMeter" parent="MetersContainer" instance=ExtResource("3_reservoir")]
 layout_mode = 2
 
 [node name="DebugPanel" type="Panel" parent="."]

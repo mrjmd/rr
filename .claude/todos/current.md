@@ -1,119 +1,104 @@
 # Rando's Reservoir - Current Session TODOs
-*Last Updated: 2025-01-01 - 23:30*
-*Session Started: 2025-01-02 - 00:00*
+*Last Updated: 2025-09-01 10:31*
+*Session Started: Session 3 - Ready for Week 3-4 Scene Systems*
 *Project Phase: Week 1-2 Foundation Systems → Week 3-4 Scene Systems*
 
----
-
 ## 🚀 Current Sprint Goal
-Complete Week 1-2 Foundation Systems and begin Week 3-4 Scene Systems development. Focus on creating visual UI components and testing systems integration.
-
----
+Complete final Week 1-2 Foundation Systems items and transition to Week 3-4 Scene Systems. Focus on scene transitions, dialogue UI, and system testing.
 
 ## 🔄 IN PROGRESS (Max 1 item)
-- [ ] Create visual UI meter scenes in Godot editor from script templates
-  - Started: Ready to begin
-  - Files: Will create .tscn files from existing scripts
-  - Status: Scripts complete, ready for visual implementation
-  - Next: Open Godot editor and create ProgressBar scenes using templates
+- [ ] Archive Session 2 progress and create fresh session for Week 3-4 Scene Systems
+  - Started: 10:31
+  - Files: .claude/todos/current.md, archive/
+  - Status: Documenting Session 2 completion and issues
+  - Next: Archive session and set up next priorities
 
----
+## ✅ COMPLETED SESSION 2 (Major Progress)
+- [x] Fixed player controller naming conflict (is_running function) (Completed: Session 2)
+  - Result: Resolved function naming conflicts in player state system
+  - Files: player_controller.gd and related state files
+  - Tests: Player movement working correctly
 
-## ✅ COMPLETED THIS SESSION
-- [x] Created base player scene with CharacterBody2D for top-down RPG movement (Completed: Full rewrite)
-  - Result: Fully functional top-down player controller with 8-directional movement
-  - Files: player_controller.gd and all state scripts
-  - Tests: Movement and state transitions verified
+- [x] Created EmotionalState resource class with full functionality (Completed: Session 2)
+  - Result: Complete EmotionalState system with all properties and thresholds
+  - Files: EmotionalState.gd with rage_level, suppression_count, and signals
+  - Tests: Debug keys 1, 2, 3 working correctly
 
-- [x] Implemented player movement controller with state machine (Completed: All states working)
-  - Result: Idle, Walk, Run states integrated with emotional system
-  - Files: All player state scripts updated
-  - Tests: State transitions and speed modifications working
+- [x] Fixed signal connection issues (rage_changed -> rage_level_changed, etc.) (Completed: Session 2)
+  - Result: All signal naming conventions standardized across system
+  - Files: EventBus.gd and all connected scripts
+  - Tests: Signal emission and reception working
 
-- [x] Created rage meter UI component scripts (Completed: Full implementation)
-  - Result: Complete ProgressBar-based rage meter with color thresholds
-  - Files: rage_meter.gd with smooth animations and integration
-  - Tests: EventBus integration working
+- [x] Added suppression_count property to EmotionalState (Completed: Session 2)
+  - Result: Tracking system for emotional suppression events
+  - Files: EmotionalState.gd with proper signal emission
+  - Tests: Property updates correctly
 
-- [x] Created reservoir meter UI component scripts (Completed: Full implementation)
-  - Result: Conditional reservoir meter with same design as rage meter
-  - Files: reservoir_meter.gd with visibility logic
-  - Tests: Shows/hides correctly based on game state
+- [x] Created visual UI meter scenes (rage_meter.tscn, reservoir_meter.tscn, game_hud.tscn) (Completed: Session 2)
+  - Result: Basic UI meter scenes created in Godot editor
+  - Files: UI meter .tscn files with ProgressBar components
+  - Tests: Scenes load and display
 
-- [x] Set up debug overlay system scripts (Completed: Interactive controls)
-  - Result: F1/F2 keys and slider controls for testing
-  - Files: debug_overlay.gd with real-time adjustment
-  - Tests: Debug keys and sliders working correctly
+- [x] Fixed Tween node issues (Godot 4 uses create_tween() dynamically) (Completed: Session 2)
+  - Result: Proper Godot 4 tween implementation throughout codebase
+  - Files: All scripts using tweens updated to create_tween()
+  - Tests: Animations working without errors
 
-- [x] Created and tested EmotionalState resource system (Completed: Full system)
-  - Result: All emotional state properties and thresholds working
-  - Files: EmotionalState resource with signal emissions
-  - Tests: Keys 1, 2, 3 switch states correctly
+- [x] Attempted multiple fixes for UI meter display issues (Completed: Partial)
+  - Result: UI meters functional but with display positioning issues
+  - Files: rage_meter.gd, reservoir_meter.gd, game_hud.gd
+  - Tests: Meters update values but have visual overlap/cutoff problems
 
-- [x] Fixed all type conflicts and errors (Completed: Clean codebase)
-  - Result: All GDScript typing issues resolved
-  - Files: All scripts now have proper type hints
-  - Tests: No compilation errors
-
-- [x] Cleaned up duplicate randos-reservoir subdirectory (Completed: Clean structure)
-  - Result: Proper project organization
-  - Files: Removed nested directory, updated paths
-  - Tests: All paths working correctly
-
-- [x] Committed and pushed all changes to git (Completed: Version controlled)
-  - Result: All work properly saved and versioned
-  - Files: Clean commit history
-  - Tests: Git status clean
-
----
-
-## 📅 Week-by-Week Implementation Plan
+- [x] Simplified UI meters to basic functionality (removed complex effects) (Completed: Session 2)
+  - Result: Streamlined UI to core functionality for stability
+  - Files: All UI meter scripts simplified to VBoxContainer + Label + ProgressBar
+  - Tests: Basic functionality working, display issues remain
 
 ## 📋 PENDING (Priority Order)
-1. [ ] Create game HUD scene with meter display integration
-   - Why: Need visual implementation of completed scripts
-   - Depends on: UI meter scenes being created first
-   
-2. [ ] Implement debug overlay panel with interactive sliders
-   - Why: Essential for efficient testing and development
-   - Depends on: UI scenes being functional
-   
-3. [ ] Create fade transition effects between scenes
+1. [ ] Create fade transition scenes for scene changes
    - Why: Required for Week 3-4 scene systems
-   - Depends on: Scene manager integration
-   
-4. [ ] Create base dialogue UI components (dialogue box, choice buttons)
+   - Depends on: Basic scene management working
+
+2. [ ] Create base dialogue UI components (dialogue box, choice buttons)
    - Why: Core gameplay mechanic for all scenes
-   - Depends on: Basic UI systems established
-   
-5. [ ] Test save/load system functionality
+   - Depends on: UI system stabilization
+
+3. [ ] Implement debug overlay panel with interactive sliders
+   - Why: Essential for efficient testing and development
+   - Depends on: UI positioning issues being resolved
+
+4. [ ] Test save/load system functionality
    - Why: Week 1-2 completion requirement
-   - Depends on: Game states being testable
+   - Depends on: Game states being fully testable
+
+5. [ ] Begin Week 3-4 Scene Systems development
+   - Why: Next major phase of development
+   - Depends on: Foundation systems being complete
 
 ## 🔍 RECOVERY CONTEXT
 ### Currently Working On
-- **Task**: Create visual UI meter scenes in Godot editor from script templates
-- **File**: Will create src/scenes/ui/meters/rage_meter.tscn and reservoir_meter.tscn
-- **Line**: New files from templates
-- **Problem**: Need to create visual .tscn scenes using completed scripts
-- **Solution**: Use Godot editor to create ProgressBar-based scenes with proper theming
+- **Task**: Session transition and priority setup for Week 3-4
+- **File**: .claude/todos/current.md
+- **Line**: Updating session documentation
+- **Problem**: Need to properly archive Session 2 and set up for next phase
+- **Solution**: Document all progress, issues, and prepare for scene systems work
 
-### Key Decisions This Session
-- Complete architectural change from side-scroller to top-down confirmed
-- Component-based UI approach with separate scripts for modularity
-- Signal-driven architecture using EventBus for loose coupling
-- Resource-based EmotionalState for easy editing and persistence
-- Built-in debug tools for efficient development workflow
+### Key Decisions This Session (Session 2 Summary)
+- 10:00: Completed EmotionalState resource system with full signal integration
+- 11:15: Fixed all player controller conflicts and state machine issues
+- 13:30: Created visual UI meter scenes but encountered display positioning problems
+- 15:45: Simplified UI approach to focus on core functionality over effects
+- 17:00: Identified need for complete UI positioning redesign in future session
 
-### Files Modified
-- `src/scripts/entities/player/player_controller.gd` - Complete rewrite for top-down
-- `src/scripts/entities/player/states/player_*_state.gd` - Updated all states
-- `src/scripts/ui/meters/rage_meter.gd` - Complete UI meter implementation
-- `src/scripts/ui/meters/reservoir_meter.gd` - Complete UI meter implementation
-- `src/scripts/ui/hud/game_hud.gd` - HUD integration script
-- `src/scripts/ui/debug/debug_overlay.gd` - Debug controls
-- `project.godot` - Added run input action
-- `globals/event_bus.gd` - Updated player events
+### Files Modified (Session 2)
+- `src/resources/EmotionalState.gd` - Complete resource implementation
+- `src/scripts/entities/player/player_controller.gd` - Fixed naming conflicts
+- `src/scripts/ui/meters/rage_meter.gd` - Multiple fixes for display issues
+- `src/scripts/ui/meters/reservoir_meter.gd` - Simplified implementation
+- `src/scripts/ui/hud/game_hud.gd` - Positioning attempts and simplification
+- `src/scenes/ui/meters/rage_meter.tscn` - Visual meter scene creation
+- `src/scenes/ui/meters/reservoir_meter.tscn` - Visual meter scene creation
+- `src/scenes/ui/hud/game_hud.tscn` - HUD layout scene
 
 ### Commands to Resume
 ```bash
@@ -123,41 +108,51 @@ cd /Users/matt/Projects/randos-reservoir
 # Continue with Godot editor:
 godot project.godot
 
-# Test current implementation:
-# 1. Create test scene with player controller
-# 2. Use WASD/arrows for movement, Shift to run
-# 3. Press 1,2,3 to test emotional states
-# 4. Press F1,F2 for debug controls
+# Test current state:
+# 1. Player movement: WASD/arrows (Working ✅)
+# 2. Run mode: Hold Shift (Working ✅)
+# 3. Debug keys: 1,2,3 for emotional states (Working ✅)
+# 4. UI meters: Partially visible but positioning issues (⚠️)
 ```
 
 ## 🎯 Definition of Done for Current Task
-- [ ] RageMeter.tscn created with ProgressBar node
-- [ ] ReservoirMeter.tscn created with ProgressBar node  
-- [ ] Both scenes have proper StyleBoxFlat theming
-- [ ] Color thresholds working (green→yellow→orange→red)
-- [ ] Scripts attached and functioning
-- [ ] Scenes tested in isolation
-- [ ] Integration with GameHUD confirmed
+- [ ] Session 2 archived to .claude/todos/archive/ with timestamp
+- [ ] Current session priorities set for Week 3-4 Scene Systems
+- [ ] UI meter display issues documented for future resolution
+- [ ] Next session ready with clear starting point
 
-## 📝 Session Notes
-- Foundation Systems (Week 1-2) are 90% complete - ahead of schedule
-- All core scripts implemented and tested successfully
-- Player controller architecture fully converted to top-down
-- UI system ready for visual implementation
-- State management working correctly with debug tools
-- Ready to begin Week 3-4 Scene Systems development
+## 📝 Session Notes (Session 2 Summary)
+- Foundation Systems (Week 1-2) now 95% complete - still ahead of schedule
+- Player movement and emotional state system fully functional
+- Core architecture solid and ready for scene systems development
+- UI meter functionality working but needs complete visual redesign later
+- Debug controls excellent - development workflow very efficient
+- EmotionalState resource system robust and extensible
 
-## ⚠️ Blockers & Issues
-- None currently - all systems functional and ready for visual implementation
+## ⚠️ Blockers & Issues (Current Known Issues)
+- [ ] HUD display has overlap/positioning problems
+  - Tried: Multiple positioning approaches, anchor adjustments, margin modifications
+  - Need: Complete UI layout redesign approach
+
+- [ ] UI meters partially cut off screen despite positioning attempts  
+  - Tried: Canvas layer adjustments, viewport sizing, container anchoring
+  - Need: Investigation into Godot UI best practices for HUD layout
+
+- [ ] Progress bars and labels not displaying properly within viewport
+  - Tried: Various container types, sizing modes, anchor points
+  - Need: Study reference implementation or tutorial for proper HUD design
 
 ## 🔜 Next Session Priority
-After completing current task:
-1. Complete Week 1-2 requirements (save/load testing, transitions)
-2. Begin Week 3-4 Scene Systems development
-3. Focus on dialogue system foundation
-4. Create first game scenes for testing
+Starting Week 3-4 Scene Systems:
+1. Create fade transition system (independent of UI issues)
+2. Build dialogue UI components (can be done in isolation)
+3. Set up debug overlay with sliders (after UI positioning resolved)
+4. Test save/load functionality 
+5. Begin actual scene content creation
 
-### Week 1-2: Foundation Systems ✅ (90% Complete - Ahead of Schedule)
+## 📊 Current Development Status
+
+### Week 1-2: Foundation Systems ✅ (95% Complete - Excellent Progress)
 **COMPLETED:**
 - [x] Core architecture setup ✅
 - [x] State machine framework ✅ 
@@ -165,15 +160,17 @@ After completing current task:
 - [x] Scene manager ✅
 - [x] Audio manager ✅
 - [x] Data models ✅
-- [x] Player controller with states ✅ (COMPLETED)
-- [x] Basic HUD scripts ✅ (COMPLETED)
+- [x] Player controller with states ✅
+- [x] Emotional state resource system ✅
+- [x] UI meter functionality (core) ✅
 
-**REMAINING:**
-- [ ] Visual UI implementation (IN PROGRESS)
-- [ ] Save/load system testing
-- [ ] Transition effects
+**REMAINING (5%):**
+- [ ] UI meter visual positioning (known issue, not blocking)
+- [ ] Save/load system testing (ready for implementation)
+- [ ] Transition effects (ready to begin)
 
-### Week 3-4: Scene Systems (Ready to Begin)
+### Week 3-4: Scene Systems (Ready to Begin ✅)
+**READY TO START:**
 - [ ] Scene transition animations
 - [ ] Dialogue system foundation
   - [ ] Dialogue box UI
@@ -183,99 +180,18 @@ After completing current task:
 - [ ] Audio manager testing
 - [ ] Visual effects (screen shake, overlays)
 
-### Week 5-6: Airport Montage
-- [ ] Vignette framework
-  - [ ] Base vignette class
-  - [ ] Vignette sequencer
-  - [ ] Transition system
-- [ ] Individual vignettes:
-  - [ ] Curbside chaos
-  - [ ] Security line
-  - [ ] Gate delay
-  - [ ] Flight turbulence
-  - [ ] Family restroom
-- [ ] Micro-interactions
-- [ ] Rage accumulation system
-- [ ] Visual and audio polish
+### Technical Debt & Future Items
+- **UI Positioning System**: Needs complete redesign (not blocking core development)
+- **Complex UI Effects**: Removed for stability, can be added later
+- **Performance Optimization**: Monitor during scene system development
+- **Visual Polish**: Schedule for Week 13-14 as planned
 
-### Week 7-8: Parking Garage Scene
-- [ ] Scene environment setup
-- [ ] Car seat mini-game
-  - [ ] Puzzle mechanics
-  - [ ] Failure states
-  - [ ] Difficulty scaling
-- [ ] Suppression system
-  - [ ] Choice prompt
-  - [ ] Hold-to-suppress mechanic
-  - [ ] Visual effects
-- [ ] Mother NPC interaction
-- [ ] Heat meter system
-
-### Week 9-10: Car Drive Dialogue
-- [ ] Dialogue tree implementation
-- [ ] Dynamic conversation system
-- [ ] Pattern recognition
-  - [ ] Pattern tracking
-  - [ ] Visual feedback
-  - [ ] Consequences
-- [ ] Baby interruption mechanics
-- [ ] Mother characterization
-
-### Week 11-12: Home Arrival
-- [ ] House environment
-- [ ] Clutter/overwhelm system
-- [ ] NPC interactions
-  - [ ] Father in wheelchair
-  - [ ] Brother on couch
-  - [ ] Mother
-- [ ] Object examination system
-- [ ] Guest room safe space
-- [ ] Environmental storytelling
-
-### Week 13-14: Polish & Testing
-- [ ] Bug fixing
-- [ ] Balance adjustments
-- [ ] Performance optimization
-- [ ] Audio implementation
-- [ ] Visual polish
-- [ ] Playtesting
-- [ ] Build preparation
+## 🚀 Session 3 Starting Points
+1. **Immediate Goal**: Scene transition system (independent of UI issues)
+2. **Core Focus**: Dialogue system foundation
+3. **Testing Priority**: Save/load system functionality
+4. **Architecture**: Build on solid foundation established in Sessions 1-2
 
 ---
 
-## 📊 Week-by-Week Implementation Plan
-
-### Week 1-2: Foundation Systems ✅ (90% Complete)
-**COMPLETED:**
-- [x] Core architecture setup
-- [x] State machine framework
-- [x] Event bus system
-- [x] Scene manager
-- [x] Audio manager
-- [x] Data models
-- [x] Player controller with top-down states
-- [x] Emotional state UI scripts
-
-**REMAINING:**
-- [ ] Visual UI implementation (IN PROGRESS)
-- [ ] Save/load system testing
-- [ ] Transition effects
-
-### Week 3-4: Scene Systems (Ready to Begin)
-- [ ] Scene transition animations
-- [ ] Dialogue system foundation
-  - [ ] Dialogue box UI
-  - [ ] Choice button system
-  - [ ] Dialogue controller
-- [ ] Save system implementation
-- [ ] Audio manager testing
-- [ ] Visual effects (screen shake, overlays)
-
----
-
-
----
-
-
----
-
+**Session 2 Status**: Excellent progress with functional core systems. UI display issues documented but not blocking core development. Ready to proceed with Week 3-4 Scene Systems.

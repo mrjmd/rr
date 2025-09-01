@@ -35,6 +35,7 @@ const MIN_LEVEL: float = 0.0
 # Current emotional state
 var current_state: EmotionalStateType = EmotionalStateType.CALM
 var previous_state: EmotionalStateType = EmotionalStateType.CALM
+var suppression_count: int = 0
 
 # Debug flag for console output
 @export var debug_enabled: bool = true
@@ -43,6 +44,7 @@ var previous_state: EmotionalStateType = EmotionalStateType.CALM
 func _init() -> void:
 	current_state = EmotionalStateType.CALM
 	previous_state = EmotionalStateType.CALM
+	suppression_count = 0
 	if debug_enabled:
 		print("[EmotionalState] Initialized - Starting in CALM state")
 
@@ -114,6 +116,7 @@ func suppress_rage() -> void:
 	var old_reservoir: float = reservoir_level
 	reservoir_level += transfer_amount
 	rage_level = 0.0
+	suppression_count += 1
 	
 	rage_suppressed.emit(amount_to_suppress)
 	

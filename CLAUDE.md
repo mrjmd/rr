@@ -259,6 +259,213 @@ godot --export-release "Windows Desktop" builds/windows/game.exe
 godot -s addons/gut/gut_cmdln.gd -gtest=res://tests/
 ```
 
+## 🎮 Godot Direct Integration (Claude Code)
+
+### Available Godot Commands
+
+```bash
+# macOS Godot path
+GODOT="/Applications/Godot.app/Contents/MacOS/Godot"
+
+# Launch editor
+$GODOT --editor --path /Users/matt/Projects/randos-reservoir
+
+# Run game normally
+$GODOT --path /Users/matt/Projects/randos-reservoir
+
+# Run game with debug output captured
+$GODOT --verbose --path /Users/matt/Projects/randos-reservoir --log-file debug.log
+
+# Run headless (no display)
+$GODOT --headless --path /Users/matt/Projects/randos-reservoir
+
+# Run with remote debugging
+$GODOT --remote-debug tcp://localhost:6007 --path /Users/matt/Projects/randos-reservoir
+
+# Run specific scene
+$GODOT --path /Users/matt/Projects/randos-reservoir res://scenes/test_scene.tscn
+
+# Check project without running
+$GODOT --headless --quit --check-only
+
+# Import assets and quit
+$GODOT --headless --editor --quit-after 2
+
+# Export builds
+$GODOT --headless --export-debug "macOS" builds/debug.app
+$GODOT --headless --export-release "macOS" builds/release.app
+```
+
+### Game Interaction & Testing
+
+```bash
+# Run game with automated input simulation
+$GODOT --path /Users/matt/Projects/randos-reservoir --script res://tests/automation.gd
+
+# Run with performance profiling
+$GODOT --path /Users/matt/Projects/randos-reservoir --profiling --gpu-profile
+
+# Capture frame-by-frame output
+$GODOT --path /Users/matt/Projects/randos-reservoir --quit-after 300 --log-file frame_log.txt
+```
+
+### Screenshot Capture Mechanisms
+
+#### Method 1: Built-in Screenshot Tool (In-Game)
+```gdscript
+# Add to any script for screenshot capability
+func take_screenshot():
+    var image = get_viewport().get_texture().get_image()
+    var timestamp = Time.get_unix_time_from_system()
+    var filename = "user://screenshot_%d.png" % timestamp
+    image.save_png(filename)
+    print("Screenshot saved to: ", OS.get_user_data_dir() + "/" + filename)
+    return filename
+```
+
+#### Method 2: Automated Screenshot Script
+```gdscript
+# automation_screenshot.gd - Run with --script flag
+extends SceneTree
+
+func _init():
+    # Wait for scene to load
+    await get_tree().process_frame
+    await get_tree().create_timer(1.0).timeout
+    
+    # Take screenshot
+    var viewport = get_root()
+    var image = viewport.get_texture().get_image()
+    image.save_png("res://screenshots/automated_capture.png")
+    print("Screenshot captured")
+    quit()
+```
+
+#### Method 3: External Screenshot via OS
+```bash
+# macOS screenshot during game run
+screencapture -x screenshot.png
+
+# Take screenshot after delay
+sleep 2 && screencapture -x game_screenshot.png
+
+# Capture specific window (requires window ID)
+screencapture -l$(osascript -e 'tell app "Godot" to id of window 1') godot_window.png
+```
+
+### Automated Testing Pipeline
+
+```bash
+#!/bin/bash
+# automated_test.sh
+
+GODOT="/Applications/Godot.app/Contents/MacOS/Godot"
+PROJECT="/Users/matt/Projects/randos-reservoir"
+
+# 1. Check project validity
+echo "Checking project..."
+$GODOT --headless --quit --check-only --path "$PROJECT"
+
+# 2. Import assets
+echo "Importing assets..."
+$GODOT --headless --editor --quit-after 2 --path "$PROJECT"
+
+# 3. Run game and capture output
+echo "Running game..."
+$GODOT --verbose --path "$PROJECT" --log-file test_run.log &
+GAME_PID=$!
+
+# 4. Wait and take screenshots
+sleep 3
+screencapture -x screenshots/game_running.png
+
+# 5. Send test inputs (would need automation script)
+# ...
+
+# 6. Kill game after testing
+sleep 10
+kill $GAME_PID
+
+# 7. Analyze log
+grep "ERROR" test_run.log && echo "Errors found!" || echo "No errors"
+```
+
+### Debug Output Analysis
+
+```bash
+# Parse Godot debug output
+$GODOT --verbose --path /Users/matt/Projects/randos-reservoir 2>&1 | tee debug.log
+
+# Filter for specific messages
+$GODOT --verbose --path /Users/matt/Projects/randos-reservoir 2>&1 | grep -E "(ERROR|WARNING)"
+
+# Monitor real-time performance
+$GODOT --path /Users/matt/Projects/randos-reservoir --profiling 2>&1 | grep "FPS"
+```
+
+### Remote Control via TCP
+
+```gdscript
+# Add to autoload for external control
+extends Node
+
+var tcp_server: TCPServer
+var control_port = 9999
+
+func _ready():
+    tcp_server = TCPServer.new()
+    tcp_server.listen(control_port)
+    print("Control server on port ", control_port)
+
+func _process(_delta):
+    if tcp_server.is_connection_available():
+        var client = tcp_server.take_connection()
+        var command = client.get_string(client.get_available_bytes())
+        
+        match command.strip_edges():
+            "screenshot":
+                take_screenshot()
+            "quit":
+                get_tree().quit()
+            "pause":
+                get_tree().paused = true
+            "resume":
+                get_tree().paused = false
+            "reload":
+                get_tree().reload_current_scene()
+```
+
+### Claude Code Integration Commands
+
+When working with Godot in Claude Code, use these commands:
+
+```bash
+# Quick test run
+/Applications/Godot.app/Contents/MacOS/Godot --path /Users/matt/Projects/randos-reservoir
+
+# Debug with output
+/Applications/Godot.app/Contents/MacOS/Godot --verbose --path /Users/matt/Projects/randos-reservoir --log-file debug.log
+
+# Headless validation
+/Applications/Godot.app/Contents/MacOS/Godot --headless --quit --check-only
+
+# Export for testing
+/Applications/Godot.app/Contents/MacOS/Godot --headless --export-debug "macOS" test_build.app
+```
+
+### Performance Monitoring
+
+```bash
+# Run with profiling
+$GODOT --path /Users/matt/Projects/randos-reservoir --profiling --gpu-profile 2>&1 | tee performance.log
+
+# Extract FPS data
+grep "FPS:" performance.log | awk '{print $2}' > fps_data.txt
+
+# Monitor memory usage
+$GODOT --verbose --path /Users/matt/Projects/randos-reservoir 2>&1 | grep -i "memory"
+```
+
 ## 🔴 INSTANT FAILURE CONDITIONS
 
 If you do ANY of these, STOP immediately:
