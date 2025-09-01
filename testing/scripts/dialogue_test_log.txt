@@ -1,0 +1,28 @@
+DIALOGUE DEMO KEY INPUT TEST
+============================
+
+Test Date: 2025-09-01 19:45
+Objective: Verify key input handling in DialogueDemo scene
+
+Expected Key Inputs:
+- ENTER: Start guided demo
+- ESC/R: Reset demo  
+- H: Toggle help instructions
+- 1: Basic dialogue test
+- 2: Choice dialogue test
+- 3: Character portraits test
+- 4: Emotional impact test
+- 5: Take screenshot
+- SPACE: Advance dialogue during conversations
+
+Scene: res://src/scenes/demo/dialogue_demo.tscn
+Script: src/scripts/demo/dialogue_demo.gd
+
+Key Input Implementation Analysis:
+- _input() method handles InputEvent properly
+- Uses event.is_action_pressed() for ui_accept/ui_cancel
+- Uses InputEventKey with event.keycode for number keys
+- Proper input handling with get_viewport().set_input_as_handled()
+
+Test Status: READY TO LAUNCH
+Next Step: Visual verification of actual key responsiveness

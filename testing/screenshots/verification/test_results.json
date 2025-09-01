@@ -1,0 +1,50 @@
+{
+	"passed_tests": 6,
+	"results": [
+		{
+			"details": "Dialogue demo scene loaded successfully",
+			"passed": true,
+			"test": "Scene Loading",
+			"timestamp": "2025-09-01T12:46:38"
+		},
+		{
+			"details": "DialogueSystem found in scene",
+			"passed": true,
+			"test": "DialogueSystem Node",
+			"timestamp": "2025-09-01T12:46:38"
+		},
+		{
+			"details": "Failed to get viewport image",
+			"passed": false,
+			"test": "Screenshot System",
+			"timestamp": "2025-09-01T12:46:38"
+		},
+		{
+			"details": "DialogueSystem node located",
+			"passed": true,
+			"test": "Dialogue System Found",
+			"timestamp": "2025-09-01T12:46:38"
+		},
+		{
+			"details": "Dialogue system starts inactive: true",
+			"passed": true,
+			"test": "Initial State",
+			"timestamp": "2025-09-01T12:46:38"
+		},
+		{
+			"details": "Dialogue activated: true",
+			"passed": true,
+			"test": "Start Dialogue",
+			"timestamp": "2025-09-01T12:46:38"
+		},
+		{
+			"details": "Dialogue ended: true",
+			"passed": true,
+			"test": "End Dialogue",
+			"timestamp": "2025-09-01T12:46:39"
+		}
+	],
+	"screenshot_count": 0,
+	"test_run_timestamp": "2025-09-01T12:46:39",
+	"total_tests": 7
+}

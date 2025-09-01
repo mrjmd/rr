@@ -3,8 +3,8 @@ extends Control
 ## Main HUD containing all UI meters and status indicators
 
 # Node references
-@onready var rage_meter: RageMeter = $HUDContainer/VBoxContainer/RageMeter
-@onready var reservoir_meter: ReservoirMeter = $HUDContainer/VBoxContainer/ReservoirMeter
+@onready var rage_meter: RageMeter = $MetersContainer/RageMeter
+@onready var reservoir_meter: ReservoirMeter = $MetersContainer/ReservoirMeter
 @onready var debug_panel: Control = $DebugPanel
 
 # HUD state
@@ -12,6 +12,9 @@ var is_hud_visible: bool = true
 var is_debug_mode: bool = false
 
 func _ready() -> void:
+	# Add to hud group for dialogue system integration
+	add_to_group("hud")
+	
 	# Set up proper anchoring for responsive design
 	_setup_anchoring()
 	

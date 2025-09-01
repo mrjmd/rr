@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8h4o1n5jgx7v"]
+
+[ext_resource type="Script" path="res://testing/dialogue_verification_test.gd" id="1_verification_script"]
+
+[node name="DialogueVerificationTest" type="Node"]
+script = ExtResource("1_verification_script")

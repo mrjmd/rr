@@ -175,8 +175,8 @@ func reset() -> void:
 	if OS.is_debug_build():
 		print("FadeTransition: Reset to initial state")
 
-## Built-in screenshot method for testing
-func take_screenshot(filename: String) -> String:
+## Built-in screenshot method for testing - Updated for organized structure
+func take_screenshot(filename: String, category: String = "working") -> String:
 	var viewport = get_viewport()
 	if not viewport:
 		print("ERROR: No viewport available for screenshot")
@@ -187,17 +187,51 @@ func take_screenshot(filename: String) -> String:
 		print("ERROR: Could not get viewport image")
 		return ""
 	
-	# Ensure screenshot directory exists
-	var dir = DirAccess.open("user://")
-	if not dir.dir_exists("test_screenshots"):
-		dir.make_dir("test_screenshots")
+	# Use organized screenshot directory structure
+	var base_dir = "res://testing/screenshots/"
+	var screenshot_dir = ""
 	
-	var full_path = "user://test_screenshots/" + filename
+	# Determine directory based on category
+	match category:
+		"working":
+			screenshot_dir = base_dir + "current/working/"
+		"session":
+			screenshot_dir = base_dir + "current/session-4/"
+		"automated":
+			screenshot_dir = base_dir + "automated/fade-transitions/"
+		"archive":
+			screenshot_dir = base_dir + "archive/session-3/"
+		_:
+			screenshot_dir = base_dir + "current/working/"
+	
+	# Ensure directory exists (convert to user:// path for actual file operations)
+	var user_path = screenshot_dir.replace("res://", "user://")
+	var dir = DirAccess.open("user://")
+	
+	# Create nested directories
+	var path_parts = user_path.replace("user://", "").split("/")
+	var current_path = "user://"
+	for part in path_parts:
+		if part != "":
+			current_path += part + "/"
+			if not dir.dir_exists(current_path):
+				dir.make_dir_recursive(current_path)
+	
+	# Add timestamp to filename if not already present
+	var timestamped_filename = filename
+	if not filename.contains(Time.get_datetime_string_from_system()):
+		var timestamp = Time.get_datetime_string_from_system().replace(":", "-").replace(" ", "_")
+		timestamped_filename = filename.get_basename() + "_" + timestamp + "." + filename.get_extension()
+	
+	var full_path = user_path + timestamped_filename
 	var error = image.save_png(full_path)
 	if error != OK:
 		print("ERROR: Could not save screenshot to ", full_path, " Error: ", error)
 		return ""
 	
-	var real_path = OS.get_user_data_dir() + "/test_screenshots/" + filename
-	print("Screenshot saved to: ", real_path)
-	return real_path
+	# Also save to project directory for easy access
+	var project_path = screenshot_dir + timestamped_filename
+	image.save_png(project_path)
+	
+	print("Screenshot saved to: ", project_path, " (and ", full_path, ")")
+	return project_path

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk7t9m5n6x2q1"]
+
+[ext_resource type="Script" path="res://src/scripts/ui/dialogue/choice_button.gd" id="1_choice_button"]
+
+[node name="ChoiceButton" type="Button"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+text = "Choice Text"
+alignment = 0
+script = ExtResource("1_choice_button")

@@ -39,7 +39,18 @@ Thumbs.db
 # Project-specific
 builds/
 logs/
-screenshots/
+# Screenshots - organized approach
+# Ignore temporary/root screenshots but keep organized ones
+dialogue_*.png
+test_screenshot_*.png
+*.png.tmp
+
+# Ignore orphaned .import files for screenshots in root
+dialogue_*.png.import
+test_screenshot_*.png.import
+
+# Keep organized screenshot directories
+!/testing/screenshots/
 user://
 
 # Temporary files

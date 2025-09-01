@@ -1,0 +1,103 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm8h5kak2n3x4"]
+
+[ext_resource type="Script" uid="uid://t3djoqawdgei" path="res://src/scripts/demo/dialogue_demo.gd" id="1_dialogue_demo"]
+[ext_resource type="PackedScene" uid="uid://bd3m2kw8yxp0g" path="res://src/scenes/ui/dialogue/dialogue_system.tscn" id="2_dialogue_system"]
+[ext_resource type="PackedScene" uid="uid://d08u1kxyupit" path="res://src/scenes/ui/dialogue/character_portrait.tscn" id="3_character_portrait"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1"]
+bg_color = Color(0.1, 0.1, 0.2, 0.9)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="DialogueDemo" type="Control" groups=["demo_scenes"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dialogue_demo")
+
+[node name="CharacterPortraitLeft" parent="." instance=ExtResource("3_character_portrait")]
+layout_mode = 1
+
+[node name="CharacterPortraitRight" parent="." instance=ExtResource("3_character_portrait")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_right = -50.0
+grow_horizontal = 0
+
+[node name="DialogueSystem" parent="." instance=ExtResource("2_dialogue_system")]
+
+[node name="DemoUI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="InstructionsPanel" type="Panel" parent="DemoUI"]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 320.0
+offset_bottom = 380.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DemoUI/InstructionsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="DemoUI/InstructionsPanel/VBoxContainer"]
+layout_mode = 2
+text = "DIALOGUE SYSTEM DEMO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InstructionsLabel" type="Label" parent="DemoUI/InstructionsPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Instructions will be updated by script"
+autowrap_mode = 2
+
+[node name="StatusPanel" type="Panel" parent="DemoUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -80.0
+offset_right = 600.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1")
+
+[node name="StatusLabel" type="Label" parent="DemoUI/StatusPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 10.0
+offset_right = -15.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Status: Ready"
+vertical_alignment = 1
+autowrap_mode = 2
