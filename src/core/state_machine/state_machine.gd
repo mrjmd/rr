@@ -3,10 +3,10 @@ extends Node
 ## Manages state transitions and updates for a collection of states
 
 # The initial state to enter when ready
-@export var initial_state: State
+@export var initial_state: Node
 
 # Current active state
-var current_state: State
+var current_state: Node
 
 # Dictionary of all available states
 var states: Dictionary = {}
@@ -20,15 +20,16 @@ signal state_changed(from_state: String, to_state: String)
 func _ready():
 	# Collect all State children
 	for child in get_children():
-		if child is State:
+		if child.has_method("enter") and child.has_method("exit"):  # Duck typing for State
 			states[child.name.to_lower()] = child
-			child.state_machine = self
+			if "state_machine" in child:  # Check if property exists
+				child.state_machine = self
 			
 			if OS.is_debug_build():
 				print("State registered: ", child.name)
 	
 	# Enter initial state
-	if initial_state:
+	if initial_state and initial_state.has_method("enter"):
 		current_state = initial_state
 		current_state.enter()
 		state_history.append(current_state.name.to_lower())
@@ -40,15 +41,15 @@ func _ready():
 		state_history.append(current_state.name.to_lower())
 
 func _process(delta):
-	if current_state:
+	if current_state and current_state.has_method("update"):
 		current_state.update(delta)
 
 func _physics_process(delta):
-	if current_state:
+	if current_state and current_state.has_method("physics_update"):
 		current_state.physics_update(delta)
 
 func _unhandled_input(event):
-	if current_state:
+	if current_state and current_state.has_method("handle_input"):
 		current_state.handle_input(event)
 
 # Transition to a new state by name
@@ -68,11 +69,13 @@ func transition_to(state_name: String) -> void:
 	# Exit current state
 	if current_state:
 		previous_state_name = current_state.name.to_lower()
-		current_state.exit()
+		if current_state.has_method("exit"):
+			current_state.exit()
 	
 	# Enter new state
 	current_state = states[state_key]
-	current_state.enter()
+	if current_state.has_method("enter"):
+		current_state.enter()
 	
 	# Update history
 	state_history.append(state_key)

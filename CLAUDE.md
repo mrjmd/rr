@@ -359,41 +359,72 @@ sleep 2 && screencapture -x game_screenshot.png
 screencapture -l$(osascript -e 'tell app "Godot" to id of window 1') godot_window.png
 ```
 
-### Automated Testing Pipeline
+### Automated Testing Pipeline (Signal-Based)
 
+#### In-Game Screenshot Capability
+```gdscript
+# Add to any test script for reliable screenshots
+func _save_screenshot(filename: String) -> void:
+    var img = get_viewport().get_texture().get_image()
+    var path = "res://test_screenshots/" + filename
+    img.save_png(path)
+    print("Screenshot saved to: " + path)
+
+# Use signals for precise timing
+signal test_point_reached(point_name: String)
+
+func _run_test() -> void:
+    emit_signal("test_point_reached", "before_transition")
+    _save_screenshot("01_before_transition.png")
+    
+    # Start transition
+    await transition.started
+    _save_screenshot("02_transition_started.png")
+    
+    await transition.halfway
+    _save_screenshot("03_transition_halfway.png")
+    
+    await transition.completed
+    _save_screenshot("04_transition_completed.png")
+```
+
+#### Transition Testing with Signals
+```gdscript
+# In your transition scripts, emit signals at key points
+signal transition_started
+signal transition_halfway
+signal transition_completed
+
+func perform_transition() -> void:
+    emit_signal("transition_started")
+    
+    # Fade in animation
+    await tween.tween_property(overlay, "modulate:a", 1.0, duration/2).finished
+    emit_signal("transition_halfway")
+    
+    # Fade out animation  
+    await tween.tween_property(overlay, "modulate:a", 0.0, duration/2).finished
+    emit_signal("transition_completed")
+```
+
+#### Automated Test Runner
 ```bash
 #!/bin/bash
-# automated_test.sh
+# run_godot_tests.sh
 
 GODOT="/Applications/Godot.app/Contents/MacOS/Godot"
 PROJECT="/Users/matt/Projects/randos-reservoir"
 
-# 1. Check project validity
-echo "Checking project..."
-$GODOT --headless --quit --check-only --path "$PROJECT"
+# Run automated test scene that uses signals
+$GODOT --path "$PROJECT" --script res://tests/automated_test_runner.gd
 
-# 2. Import assets
-echo "Importing assets..."
-$GODOT --headless --editor --quit-after 2 --path "$PROJECT"
-
-# 3. Run game and capture output
-echo "Running game..."
-$GODOT --verbose --path "$PROJECT" --log-file test_run.log &
-GAME_PID=$!
-
-# 4. Wait and take screenshots
-sleep 3
-screencapture -x screenshots/game_running.png
-
-# 5. Send test inputs (would need automation script)
-# ...
-
-# 6. Kill game after testing
-sleep 10
-kill $GAME_PID
-
-# 7. Analyze log
-grep "ERROR" test_run.log && echo "Errors found!" || echo "No errors"
+# Check test results
+if [ -f "test_screenshots/test_complete.txt" ]; then
+    echo "Tests completed successfully"
+    ls -la test_screenshots/*.png
+else
+    echo "Tests failed or incomplete"
+fi
 ```
 
 ### Debug Output Analysis

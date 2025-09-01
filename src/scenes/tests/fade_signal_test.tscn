@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3t8x5cqr2wvv"]
+
+[ext_resource type="Script" path="res://src/scripts/tests/fade_signal_test.gd" id="1_4bkxy"]
+
+[node name="FadeSignalTest" type="Node"]
+script = ExtResource("1_4bkxy")

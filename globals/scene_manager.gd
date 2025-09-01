@@ -12,7 +12,8 @@ const SCENES = {
 	"parking_garage": "res://src/scenes/day1/parking_garage/parking_garage.tscn",
 	"car_drive": "res://src/scenes/day1/car_drive/car_drive.tscn",
 	"family_home": "res://src/scenes/day1/family_home/home_arrival.tscn",
-	"test_scene": "res://src/scenes/shared/test_scene.tscn"
+	"test_scene": "res://src/scenes/shared/simple_test_scene.tscn",
+	"transition_demo": "res://src/scenes/shared/transition_demo.tscn"
 }
 
 # Transition types
@@ -25,13 +26,16 @@ enum TransitionType {
 	SLIDE_RIGHT
 }
 
-# References to transition scenes (will be created when needed)
+# References to transition scenes
 var fade_transition_scene: PackedScene
 var current_transition: Node
 
 func _ready():
 	# Set as singleton
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	# Load fade transition scene
+	fade_transition_scene = preload("res://src/scenes/transitions/fade_transition.tscn")
 	
 	# Get reference to current scene
 	var root = get_tree().root
@@ -85,22 +89,24 @@ func change_scene_to_path(scene_path: String, transition: TransitionType = Trans
 func _transition_to_scene(scene_path: String, transition: TransitionType):
 	is_transitioning = true
 	
-	# Create transition overlay
-	var transition_node = await _create_transition(transition)
+	# Create and setup transition overlay
+	var transition_node = _create_transition(transition)
 	if transition_node:
 		get_tree().root.add_child(transition_node)
+		current_transition = transition_node
 		
-		# Fade in transition
-		if transition_node.has_method("fade_in"):
-			await transition_node.fade_in()
-	
-	# Load new scene
-	_load_scene_immediate(scene_path)
-	
-	# Fade out transition
-	if transition_node and transition_node.has_method("fade_out"):
+		# Fade in transition (hide current scene)
+		await transition_node.fade_in()
+		
+		# Load new scene while screen is black
+		_load_scene_immediate(scene_path)
+		
+		# Fade out transition (reveal new scene)
 		await transition_node.fade_out()
+		
+		# Clean up
 		transition_node.queue_free()
+		current_transition = null
 	
 	is_transitioning = false
 
@@ -124,42 +130,23 @@ func _load_scene_immediate(scene_path: String):
 		push_error("Failed to load scene: " + scene_path)
 
 func _create_transition(transition_type: TransitionType) -> Node:
-	# For now, create a simple fade transition
-	# Later we'll create proper transition scenes
-	var canvas = CanvasLayer.new()
-	var rect = ColorRect.new()
-	rect.color = Color.BLACK if transition_type == TransitionType.FADE_BLACK else Color.WHITE
-	rect.set_anchors_preset(Control.PRESET_FULL_RECT)
-	rect.modulate.a = 0.0
-	canvas.add_child(rect)
+	# Create proper fade transition from scene
+	if not fade_transition_scene:
+		push_error("FadeTransition scene not loaded!")
+		return null
 	
-	# Add fade methods
-	canvas.set_script(load("res://globals/transition_helper.gd") if ResourceLoader.exists("res://globals/transition_helper.gd") else null)
+	var transition = fade_transition_scene.instantiate()
 	
-	# If script doesn't exist, add basic fade functionality
-	if not canvas.has_method("fade_in"):
-		canvas.set_meta("rect", rect)
-		canvas.set_script(null)  # Clear any failed script
-		
-		# Create inline fade functions
-		var fade_in_func = func():
-			var tween = canvas.create_tween()
-			tween.tween_property(rect, "modulate:a", 1.0, 0.5)
-			await tween.finished
-		
-		var fade_out_func = func():
-			var tween = canvas.create_tween()
-			tween.tween_property(rect, "modulate:a", 0.0, 0.5)
-			await tween.finished
-		
-		canvas.set_meta("fade_in", fade_in_func)
-		canvas.set_meta("fade_out", fade_out_func)
-		
-		# Make methods callable
-		canvas.fade_in = canvas.get_meta("fade_in")
-		canvas.fade_out = canvas.get_meta("fade_out")
+	# Configure transition based on type
+	match transition_type:
+		TransitionType.FADE_BLACK:
+			transition.set_fade_color(Color.BLACK)
+		TransitionType.FADE_WHITE:
+			transition.set_fade_color(Color.WHITE)
+		_:
+			transition.set_fade_color(Color.BLACK)  # Default to black
 	
-	return canvas
+	return transition
 
 func _on_scene_transition_requested(scene_key: String):
 	change_scene(scene_key)
@@ -179,3 +166,114 @@ func get_current_scene_name() -> String:
 	if scene_stack.size() > 0:
 		return scene_stack[-1].get_file().get_basename()
 	return ""
+
+## New transition methods using the FadeTransition system
+
+## Transition to a scene using scene key with fade effect
+func transition_to_scene(scene_key: String, fade_duration: float = 0.5) -> void:
+	if is_transitioning:
+		print("Already transitioning, ignoring request")
+		return
+		
+	if not scene_key in SCENES:
+		push_error("Scene key not found: " + scene_key)
+		return
+	
+	var scene_path = SCENES[scene_key]
+	
+	# Update game manager
+	GameManager.current_phase = scene_key
+	
+	await _transition_with_fade(scene_path, fade_duration)
+	
+	# Notify systems
+	EventBus.scene_loaded.emit(scene_key)
+
+## Transition to a scene using direct path with fade effect
+func transition_to_packed(packed_scene: PackedScene, fade_duration: float = 0.5) -> void:
+	if is_transitioning:
+		print("Already transitioning, ignoring request")
+		return
+		
+	if not packed_scene:
+		push_error("PackedScene is null!")
+		return
+	
+	await _transition_with_packed_scene(packed_scene, fade_duration)
+	
+	# Notify systems
+	var scene_name = "packed_scene"  # Generic name for packed scenes
+	EventBus.scene_loaded.emit(scene_name)
+
+## Internal method to handle fade transition with scene path
+func _transition_with_fade(scene_path: String, fade_duration: float) -> void:
+	is_transitioning = true
+	
+	# Create fade transition
+	var transition = _create_transition(TransitionType.FADE_BLACK)
+	if transition:
+		transition.set_fade_duration(fade_duration)
+		get_tree().root.add_child(transition)
+		current_transition = transition
+		
+		# Fade in (hide current scene)
+		await transition.fade_in()
+		
+		# Load new scene while screen is black
+		_load_scene_immediate(scene_path)
+		
+		# Fade out (reveal new scene)
+		await transition.fade_out()
+		
+		# Clean up
+		transition.queue_free()
+		current_transition = null
+	
+	is_transitioning = false
+
+## Internal method to handle fade transition with packed scene
+func _transition_with_packed_scene(packed_scene: PackedScene, fade_duration: float) -> void:
+	is_transitioning = true
+	
+	# Create fade transition
+	var transition = _create_transition(TransitionType.FADE_BLACK)
+	if transition:
+		transition.set_fade_duration(fade_duration)
+		get_tree().root.add_child(transition)
+		current_transition = transition
+		
+		# Fade in (hide current scene)
+		await transition.fade_in()
+		
+		# Load new scene while screen is black
+		_load_packed_scene_immediate(packed_scene)
+		
+		# Fade out (reveal new scene)
+		await transition.fade_out()
+		
+		# Clean up
+		transition.queue_free()
+		current_transition = null
+	
+	is_transitioning = false
+
+## Load a packed scene immediately without transition
+func _load_packed_scene_immediate(packed_scene: PackedScene) -> void:
+	# Free current scene
+	if current_scene:
+		current_scene.queue_free()
+		await current_scene.tree_exited
+	
+	# Instantiate new scene
+	current_scene = packed_scene.instantiate()
+	if current_scene:
+		get_tree().root.add_child(current_scene)
+		get_tree().current_scene = current_scene
+		
+		# Add to stack with generic name
+		scene_stack.append("packed_scene")
+		
+		if OS.is_debug_build():
+			print("Packed scene loaded")
+	else:
+		push_error("Failed to instantiate packed scene")
