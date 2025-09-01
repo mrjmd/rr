@@ -3,10 +3,12 @@ extends Control
 ## UI component displaying the player's rage level with visual effects and thresholds
 
 # Node references
-@onready var progress_bar: ProgressBar = $VBoxContainer/ProgressContainer/ProgressBar
-@onready var label: Label = $VBoxContainer/Label
-@onready var threshold_markers: Control = $VBoxContainer/ProgressContainer/ThresholdMarkers
-@onready var tween: Tween = $Tween
+@onready var progress_bar: ProgressBar = $HBoxContainer/ProgressContainer/ProgressBar
+@onready var label: Label = $HBoxContainer/Label
+@onready var percentage_label: Label = $HBoxContainer/ProgressContainer/PercentageLabel
+@onready var threshold_markers: Control = $HBoxContainer/ProgressContainer/ThresholdMarkers
+# Tween will be created dynamically in Godot 4
+var tween: Tween
 
 # Visual components
 var progress_style: StyleBoxFlat
@@ -45,15 +47,16 @@ func _ready() -> void:
 	
 	# Connect to emotional state updates
 	if GameManager.emotional_state:
-		GameManager.emotional_state.rage_changed.connect(_on_rage_changed)
+		GameManager.emotional_state.rage_level_changed.connect(_on_rage_level_changed)
 		# Initialize with current value
 		_update_display(GameManager.emotional_state.rage_level, false)
 	
 	# Connect to event bus
 	EventBus.rage_updated.connect(_on_rage_updated)
 	
-	# Set initial label
+	# Set initial label and percentage
 	label.text = "RAGE"
+	percentage_label.text = "0%"
 
 func _setup_progress_bar() -> void:
 	progress_bar.min_value = 0.0
@@ -114,7 +117,7 @@ func _process(delta: float) -> void:
 		if shake_intensity <= 0.0:
 			position = original_position
 
-func _on_rage_changed(new_rage: float) -> void:
+func _on_rage_level_changed(new_rage: float, _old_rage: float) -> void:
 	_update_display(new_rage, true)
 
 func _on_rage_updated(new_rage: float) -> void:
@@ -155,8 +158,8 @@ func _update_visual_effects() -> void:
 	var color = _get_rage_color(current_rage)
 	progress_style.bg_color = color
 	
-	# Update label with percentage
-	label.text = "RAGE: %d%%" % int(current_rage)
+	# Update percentage label on the progress bar
+	percentage_label.text = "%d%%" % int(current_rage)
 	
 	# Handle high rage effects
 	if current_rage >= THRESHOLD_ANGRY:

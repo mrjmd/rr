@@ -63,7 +63,7 @@ func _initialize_game_data():
 		player_data = load("res://src/resources/game_data/player_data.tres")
 	else:
 		# Create default player data dynamically
-		var PlayerDataClass = load("res://src/resources/player_data.gd")
+		var PlayerDataClass = load("res://src/resources/game_data/player_data.gd")
 		if PlayerDataClass:
 			player_data = PlayerDataClass.new()
 		else:

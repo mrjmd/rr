@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3xy8vnq2m1p5"]
+
+[ext_resource type="Script" path="res://src/scripts/ui/hud/game_hud.gd" id="1_3xy6f"]
+[ext_resource type="PackedScene" uid="uid://bgqj7xvnfq7ol" path="res://src/scenes/ui/meters/rage_meter.tscn" id="2_rage"]
+[ext_resource type="PackedScene" uid="uid://ba5yg5pvhs1d1" path="res://src/scenes/ui/meters/reservoir_meter.tscn" id="3_reservoir"]
+
+[node name="GameHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("1_3xy6f")
+
+[node name="HUDContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 220.0
+offset_bottom = 80.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUDContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="RageMeter" parent="HUDContainer/VBoxContainer" instance=ExtResource("2_rage")]
+layout_mode = 2
+
+[node name="ReservoirMeter" parent="HUDContainer/VBoxContainer" instance=ExtResource("3_reservoir")]
+layout_mode = 2
+
+[node name="DebugPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -270.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 320.0
+size_flags_horizontal = 0
+size_flags_vertical = 0

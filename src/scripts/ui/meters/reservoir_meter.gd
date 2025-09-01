@@ -3,10 +3,12 @@ extends Control
 ## UI component displaying the reservoir of suppressed emotions
 
 # Node references
-@onready var progress_bar: ProgressBar = $VBoxContainer/ProgressContainer/ProgressBar
-@onready var label: Label = $VBoxContainer/Label
-@onready var warning_icon: TextureRect = $VBoxContainer/ProgressContainer/WarningIcon
-@onready var tween: Tween = $Tween
+@onready var progress_bar: ProgressBar = $HBoxContainer/ProgressContainer/ProgressBar
+@onready var label: Label = $HBoxContainer/Label
+@onready var percentage_label: Label = $HBoxContainer/ProgressContainer/PercentageLabel
+@onready var warning_icon: TextureRect = $HBoxContainer/ProgressContainer/WarningIcon
+# Tween will be created dynamically in Godot 4
+var tween: Tween
 
 # Visual components
 var progress_style: StyleBoxFlat
@@ -43,8 +45,8 @@ func _ready() -> void:
 	
 	# Connect to emotional state updates
 	if GameManager.emotional_state:
-		GameManager.emotional_state.reservoir_changed.connect(_on_reservoir_changed)
-		GameManager.emotional_state.suppression_triggered.connect(_on_first_suppression)
+		GameManager.emotional_state.reservoir_level_changed.connect(_on_reservoir_level_changed)
+		GameManager.emotional_state.rage_suppressed.connect(_on_rage_suppressed)
 		# Initialize with current value
 		if GameManager.emotional_state.suppression_count > 0:
 			first_suppression_occurred = true
@@ -55,8 +57,9 @@ func _ready() -> void:
 	EventBus.reservoir_updated.connect(_on_reservoir_updated)
 	EventBus.suppression_activated.connect(_on_suppression_activated)
 	
-	# Set initial label
+	# Set initial label and percentage
 	label.text = "RESERVOIR"
+	percentage_label.text = "0%"
 	
 	# Hide warning icon initially
 	if warning_icon:
@@ -93,7 +96,7 @@ func _setup_styles() -> void:
 	progress_bar.add_theme_stylebox_override("fill", progress_style)
 	progress_bar.add_theme_stylebox_override("background", background_style)
 
-func _on_first_suppression() -> void:
+func _on_rage_suppressed(_amount_suppressed: float) -> void:
 	if not first_suppression_occurred:
 		first_suppression_occurred = true
 		_make_visible()
@@ -116,7 +119,7 @@ func _make_visible() -> void:
 	var fade_tween = create_tween()
 	fade_tween.tween_property(self, "modulate", Color.WHITE, 0.8)
 
-func _on_reservoir_changed(new_reservoir: float) -> void:
+func _on_reservoir_level_changed(new_reservoir: float, _old_reservoir: float) -> void:
 	_update_display(new_reservoir, true)
 
 func _on_reservoir_updated(new_reservoir: float) -> void:
@@ -160,8 +163,8 @@ func _update_visual_effects() -> void:
 	var color = _get_reservoir_color(current_reservoir)
 	progress_style.bg_color = color
 	
-	# Update label with percentage
-	label.text = "RESERVOIR: %d%%" % int(current_reservoir)
+	# Update percentage label on the progress bar
+	percentage_label.text = "%d%%" % int(current_reservoir)
 	
 	# Handle warning effects
 	if current_reservoir >= WARNING_THRESHOLD:
