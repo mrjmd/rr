@@ -216,7 +216,10 @@ func _handle_open_settings() -> void:
 	navigate_to_menu("settings_menu")
 	
 	# For now, just show a debug message
-	EventBus.debug_message.emit("Settings menu not yet implemented")
+	if has_node("/root/EventBus"):
+		var event_bus = get_node("/root/EventBus")
+		if event_bus.has_signal("debug_message"):
+			event_bus.debug_message.emit("Settings menu not yet implemented")
 
 func _handle_return_to_main_menu() -> void:
 	"""Handle main menu button press"""

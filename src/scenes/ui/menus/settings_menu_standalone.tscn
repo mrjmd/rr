@@ -1,0 +1,240 @@
+[gd_scene load_steps=2 format=3 uid="uid://baxyz9w1j2klm"]
+
+[ext_resource type="Script" path="res://src/scripts/ui/menus/settings_menu_standalone.gd" id="1_standalone"]
+
+[node name="SettingsMenuStandalone" type="CanvasLayer"]
+layer = 225
+script = ExtResource("1_standalone")
+
+[node name="MenuContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="BackgroundOverlay" type="ColorRect" parent="MenuContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.5)
+mouse_filter = 2
+
+[node name="MainPanel" type="Panel" parent="MenuContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -300.0
+offset_right = 400.0
+offset_bottom = 300.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 25.0
+offset_right = -30.0
+offset_bottom = -25.0
+
+[node name="TitleContainer" type="VBoxContainer" parent="MenuContainer/MainPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="TitleLabel" type="Label" parent="MenuContainer/MainPanel/VBoxContainer/TitleContainer"]
+layout_mode = 2
+text = "SETTINGS"
+horizontal_alignment = 1
+
+[node name="Separator" type="HSeparator" parent="MenuContainer/MainPanel/VBoxContainer"]
+layout_mode = 2
+modulate = Color(1, 1, 1, 0.3)
+
+[node name="TabContainer" type="TabContainer" parent="MenuContainer/MainPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Audio" type="Control" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+
+[node name="MasterVolumeContainer" type="VBoxContainer" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/MasterVolumeContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/MasterVolumeContainer/HBoxContainer"]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="VSeparator" type="VSeparator" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/MasterVolumeContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MasterVolumeSlider" type="HSlider" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/MasterVolumeContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="MasterVolumeValue" type="Label" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/MasterVolumeContainer"]
+layout_mode = 2
+text = "100%"
+horizontal_alignment = 2
+
+[node name="VSeparator" type="VSeparator" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio/VBoxContainer"]
+layout_mode = 2
+modulate = Color(1, 1, 1, 0.2)
+
+[node name="MusicVolumeContainer" type="VBoxContainer" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/MusicVolumeContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/MusicVolumeContainer/HBoxContainer"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="VSeparator" type="VSeparator" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/MusicVolumeContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MusicVolumeSlider" type="HSlider" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/MusicVolumeContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="MusicVolumeValue" type="Label" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/MusicVolumeContainer"]
+layout_mode = 2
+text = "100%"
+horizontal_alignment = 2
+
+[node name="VSeparator2" type="VSeparator" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio/VBoxContainer"]
+layout_mode = 2
+modulate = Color(1, 1, 1, 0.2)
+
+[node name="SFXVolumeContainer" type="VBoxContainer" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/SFXVolumeContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/SFXVolumeContainer/HBoxContainer"]
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="VSeparator" type="VSeparator" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/SFXVolumeContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="SFXVolumeSlider" type="HSlider" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/SFXVolumeContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SFXVolumeValue" type="Label" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/SFXVolumeContainer"]
+layout_mode = 2
+text = "100%"
+horizontal_alignment = 2
+
+[node name="Video" type="Control" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Video"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+
+[node name="FullscreenContainer" type="HBoxContainer" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Video/VBoxContainer"]
+layout_mode = 2
+
+[node name="FullscreenCheck" type="CheckBox" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Video/VBoxContainer/FullscreenContainer"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="VSeparator" type="VSeparator" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Video/VBoxContainer"]
+layout_mode = 2
+modulate = Color(1, 1, 1, 0.2)
+
+[node name="VsyncContainer" type="HBoxContainer" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Video/VBoxContainer"]
+layout_mode = 2
+
+[node name="VsyncCheck" type="CheckBox" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Video/VBoxContainer/VsyncContainer"]
+layout_mode = 2
+text = "Vertical Sync"
+
+[node name="VSeparator2" type="VSeparator" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Video/VBoxContainer"]
+layout_mode = 2
+modulate = Color(1, 1, 1, 0.2)
+
+[node name="ResolutionContainer" type="VBoxContainer" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Video/VBoxContainer"]
+layout_mode = 2
+
+[node name="ResolutionLabel" type="Label" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Video/VBoxContainer/ResolutionContainer"]
+layout_mode = 2
+text = "Resolution"
+
+[node name="ResolutionOption" type="OptionButton" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Video/VBoxContainer/ResolutionContainer"]
+layout_mode = 2
+
+[node name="Controls" type="Control" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+
+[node name="ControlsInfo" type="Label" parent="MenuContainer/MainPanel/VBoxContainer/TabContainer/Controls/VBoxContainer"]
+layout_mode = 2
+text = "Input Remapping
+
+Controls can be remapped through the pause menu during gameplay.
+
+Current Bindings:
+• Move: Arrow Keys / WASD
+• Interact: Space / Enter
+• Pause: Escape
+• Menu Navigation: Arrow Keys / Tab
+
+Input remapping interface will be available in a future update."
+autowrap_mode = 2
+vertical_alignment = 1
+
+[node name="Separator2" type="HSeparator" parent="MenuContainer/MainPanel/VBoxContainer"]
+layout_mode = 2
+modulate = Color(1, 1, 1, 0.3)
+
+[node name="ButtonContainer" type="HBoxContainer" parent="MenuContainer/MainPanel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="BackButton" type="Button" parent="MenuContainer/MainPanel/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(200, 50)
+text = "Back"

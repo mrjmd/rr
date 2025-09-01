@@ -180,7 +180,10 @@ func _handle_open_settings() -> void:
 	navigate_to_menu("settings_menu")
 	
 	# For now, just show a debug message
-	EventBus.debug_message.emit("Settings menu not yet implemented")
+	if has_node("/root/EventBus"):
+		var event_bus = get_node("/root/EventBus")
+		if event_bus.has_signal("debug_message"):
+			event_bus.debug_message.emit("Settings menu not yet implemented")
 
 func _handle_quit_game() -> void:
 	"""Handle quit game button press"""
@@ -198,8 +201,10 @@ func integrate_with_scene_manager() -> void:
 	super.integrate_with_scene_manager()
 	
 	# Connect to scene loaded events to handle transitions
-	if not EventBus.scene_loaded.is_connected(_on_scene_loaded):
-		EventBus.scene_loaded.connect(_on_scene_loaded)
+	if has_node("/root/EventBus"):
+		var event_bus = get_node("/root/EventBus")
+		if event_bus.has_signal("scene_loaded") and not event_bus.scene_loaded.is_connected(_on_scene_loaded):
+			event_bus.scene_loaded.connect(_on_scene_loaded)
 
 func _on_scene_loaded(scene_name: String) -> void:
 	"""Handle when a new scene is loaded"""

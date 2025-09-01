@@ -69,9 +69,13 @@ func _initialize_menu() -> void:
 
 func _connect_menu_signals() -> void:
 	"""Connect to EventBus signals"""
-	# Connect to global pause/resume events
-	EventBus.game_paused.connect(_on_game_paused)
-	EventBus.game_resumed.connect(_on_game_resumed)
+	# Connect to global pause/resume events - check if EventBus exists first
+	if has_node("/root/EventBus"):
+		var event_bus = get_node("/root/EventBus")
+		if event_bus.has_signal("game_paused"):
+			event_bus.game_paused.connect(_on_game_paused)
+		if event_bus.has_signal("game_resumed"):
+			event_bus.game_resumed.connect(_on_game_resumed)
 
 # Public Menu API
 
@@ -100,7 +104,10 @@ func open_menu(animate: bool = true) -> void:
 	
 	# Emit signals
 	menu_opened.emit(menu_name)
-	EventBus.game_paused.emit()
+	if has_node("/root/EventBus"):
+		var event_bus = get_node("/root/EventBus")
+		if event_bus.has_signal("game_paused"):
+			event_bus.game_paused.emit()
 	
 	if OS.is_debug_build():
 		print("Menu opened: ", menu_name)
@@ -127,7 +134,10 @@ func close_menu(animate: bool = true) -> void:
 	
 	# Emit signals
 	menu_closed.emit(menu_name)
-	EventBus.game_resumed.emit()
+	if has_node("/root/EventBus"):
+		var event_bus = get_node("/root/EventBus")
+		if event_bus.has_signal("game_resumed"):
+			event_bus.game_resumed.emit()
 	
 	if OS.is_debug_build():
 		print("Menu closed: ", menu_name)
