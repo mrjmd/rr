@@ -1,0 +1,60 @@
+# GameHUD Scene Structure Template
+# Create this scene in Godot editor with the following hierarchy:
+
+# GameHUD (Control) - Script: src/scripts/ui/hud/game_hud.gd
+# ├── HUDContainer (MarginContainer)
+# │   ├── Anchor: Top Left
+# │   ├── Margin Left: 20
+# │   ├── Margin Top: 20
+# │   ├── Margin Right: 0
+# │   ├── Margin Bottom: 0
+# │   └── VBoxContainer
+# │       ├── Separation: 10
+# │       ├── RageMeter (instance of rage_meter.tscn)
+# │       │   └── Name: RageMeter
+# │       └── ReservoirMeter (instance of reservoir_meter.tscn)
+# │           └── Name: ReservoirMeter
+# └── DebugPanel (Panel)
+#     ├── Name: DebugPanel
+#     ├── Anchor: Top Right
+#     ├── Position: Offset from top right corner
+#     ├── Size: 250x300
+#     ├── Initially Visible: false (only in debug builds)
+#     └── Style: Semi-transparent background
+
+# Main Control Settings:
+# - Layout: Full Rect
+# - Anchor: Top Left (0,0,0,0)
+# - Mouse Filter: Pass (allow interaction with underlying elements)
+
+# HUDContainer Settings:
+# - Anchor and Margin: Top Left with 20px margins
+# - Size Flags: None (keep natural size)
+
+# VBoxContainer Settings:
+# - Separation: 10 pixels between meters
+# - Size Flags: None
+
+# RageMeter Instance Settings:
+# - Always visible
+# - Connected to emotional state
+
+# ReservoirMeter Instance Settings:
+# - Initially hidden (appears after suppression)
+# - Connected to emotional state
+
+# DebugPanel Settings:
+# - Anchor: Top Right
+# - Margin Right: -270
+# - Margin Top: 20
+# - Size: 250x300
+# - Background: Semi-transparent dark panel
+# - Visible only in debug builds
+
+# Instructions:
+# 1. Create the individual meter scenes first (rage_meter.tscn, reservoir_meter.tscn)
+# 2. Instance them in this GameHUD scene
+# 3. Set up proper anchoring and margins
+# 4. Connect the script and test in Godot
+
+# Save as: src/scenes/ui/hud/game_hud.tscn

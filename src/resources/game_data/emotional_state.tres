@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EmotionalState" file="res://src/resources/emotional_state.gd"]
+
+[resource]
+script = ExtResource("res://src/resources/emotional_state.gd")
+rage_level = 0.0
+reservoir_level = 0.0
+overwhelm_level = 0.0
+suppression_count = 0
+is_suppressing = false
+current_state = 0
+state_duration = 0.0
+last_suppression_time = 0.0
+emotional_triggers = []

@@ -1,0 +1,55 @@
+# ReservoirMeter Scene Structure Template
+# Create this scene in Godot editor with the following hierarchy:
+
+# ReservoirMeter (Control) - Script: src/scripts/ui/meters/reservoir_meter.gd
+# ├── VBoxContainer
+# │   ├── Label (name: Label)
+# │   │   ├── Text: "RESERVOIR"
+# │   │   ├── AutoWrap: false
+# │   │   ├── Horizontal Alignment: Center
+# │   └── ProgressContainer (Control)
+# │       ├── Layout: Full Rect
+# │       ├── ProgressBar (name: ProgressBar)
+# │       │   ├── Min Value: 0
+# │       │   ├── Max Value: 100
+# │       │   ├── Step: 0.1
+# │       │   ├── Value: 0
+# │       │   └── Size: 200x20
+# │       └── WarningIcon (TextureRect)
+# │           ├── Name: WarningIcon
+# │           ├── Anchor: Center Right
+# │           ├── Size: 16x16
+# │           ├── Position: Offset -20x from right edge
+# │           └── Texture: Use warning/alert icon
+# └── Tween (name: Tween)
+
+# Control Node Settings:
+# - Anchor: Top Left
+# - Size: 220x50
+# - Minimum Size: 220x50
+# - Initially Visible: false (shows after first suppression)
+
+# VBoxContainer Settings:
+# - Layout: Full Rect
+# - Separation: 5
+
+# Label Settings:
+# - Size Flags Horizontal: Fill
+# - AutoWrap: false
+# - Horizontal Alignment: Center
+
+# ProgressContainer Settings:
+# - Layout: Fill
+# - Size: 200x20
+
+# ProgressBar Settings:
+# - Custom StyleBox for "background" and "fill" (blue theme)
+# - Size Flags: Expand Fill (both H and V)
+
+# WarningIcon Settings:
+# - Initially Visible: false
+# - Modulate: White
+# - Expand: false
+# - Stretch Mode: Keep Aspect Centered
+
+# Save as: src/scenes/ui/meters/reservoir_meter.tscn

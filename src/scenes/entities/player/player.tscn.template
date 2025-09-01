@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://b4v0k1x2y3z4w"]
+
+[ext_resource type="Script" path="res://src/scripts/entities/player/player_controller.gd" id="1_abc123"]
+[ext_resource type="Script" path="res://src/core/state_machine/state_machine.gd" id="2_def456"]
+[ext_resource type="Script" path="res://src/scripts/entities/player/states/player_idle_state.gd" id="3_ghi789"]
+[ext_resource type="Script" path="res://src/scripts/entities/player/states/player_walk_state.gd" id="4_jkl012"]
+[ext_resource type="Script" path="res://src/scripts/entities/player/states/player_jump_state.gd" id="5_mno345"]
+[ext_resource type="Script" path="res://src/scripts/entities/player/states/player_fall_state.gd" id="6_pqr678"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1"]
+radius = 16.0
+height = 64.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1"]
+size = Vector2(32, 64)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_abc123")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_def456")
+
+[node name="PlayerIdleState" type="Node" parent="StateMachine"]
+script = ExtResource("3_ghi789")
+
+[node name="PlayerWalkState" type="Node" parent="StateMachine"]
+script = ExtResource("4_jkl012")
+
+[node name="PlayerJumpState" type="Node" parent="StateMachine"]
+script = ExtResource("5_mno345")
+
+[node name="PlayerFallState" type="Node" parent="StateMachine"]
+script = ExtResource("6_pqr678")
+
+# SCENE STRUCTURE NOTES:
+# 
+# Player (CharacterBody2D) - Root node with player_controller.gd script
+# ├── CollisionShape2D - CapsuleShape2D (16x64 radius/height)
+# ├── Sprite2D - Placeholder texture (32x64 pixels)
+# ├── AnimationPlayer - For future animations
+# └── StateMachine - State machine node with all player states
+#     ├── PlayerIdleState - Idle behavior
+#     ├── PlayerWalkState - Walking behavior  
+#     ├── PlayerJumpState - Jumping behavior
+#     └── PlayerFallState - Falling behavior
+#
+# SETUP INSTRUCTIONS:
+# 1. Open Godot editor
+# 2. Create new scene
+# 3. Add CharacterBody2D as root, rename to "Player"
+# 4. Attach player_controller.gd script to root
+# 5. Add CollisionShape2D child with CapsuleShape2D
+# 6. Set CapsuleShape2D radius=16, height=64
+# 7. Add Sprite2D child with placeholder texture 32x64
+# 8. Add AnimationPlayer child
+# 9. Add Node child, rename to "StateMachine", attach state_machine.gd script
+# 10. Add 4 Node children to StateMachine with respective state scripts
+# 11. In StateMachine inspector, set initial_state to PlayerIdleState
+# 12. Save scene as player.tscn

@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3 uid="uid://test123player"]
+
+[ext_resource type="PackedScene" path="res://src/scenes/entities/player/player.tscn" id="1_player"]
+
+[node name="PlayerTestScene" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+transform = Transform2D(1, 0, 0, 1, 400, 300)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(0, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="ColorRect" type="ColorRect" parent="Floor"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -25.0
+offset_right = 400.0
+offset_bottom = 25.0
+color = Color(0.5, 0.3, 0.2, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(800, 50)
+
+# TEST SCENE SETUP INSTRUCTIONS:
+# 
+# 1. Create new Scene in Godot
+# 2. Add Node2D as root, rename to "PlayerTestScene"  
+# 3. Instance the player.tscn scene as child
+# 4. Position Player at (400, 300)
+# 5. Add StaticBody2D child at (0, 500) for floor
+# 6. Add CollisionShape2D to floor with RectangleShape2D (800x50)
+# 7. Add ColorRect to floor for visual (800x50, brown color)
+# 8. Save as player_test_scene.tscn
+# 
+# CONTROLS FOR TESTING:
+# - A/D or Arrow Keys: Move left/right
+# - Space or Up Arrow: Jump
+# - 1: Increase rage (debug)
+# - 2: Suppress rage (debug)  
+# - 3: Increase overwhelm (debug)
+# - F3: Toggle debug info

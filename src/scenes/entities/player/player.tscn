@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://dlj66r4cxomf0"]
+
+[ext_resource type="Script" uid="uid://bx0xqumj6ky0i" path="res://src/scripts/entities/player/player_controller.gd" id="1_6kvpb"]
+[ext_resource type="Script" uid="uid://ctla8temeit50" path="res://src/core/state_machine/state_machine.gd" id="2_ja0qc"]
+[ext_resource type="Script" uid="uid://cnbq1k5d115hw" path="res://src/scripts/entities/player/states/player_idle_state.gd" id="3_sjc18"]
+[ext_resource type="Script" uid="uid://06marrvrukx4" path="res://src/scripts/entities/player/states/player_walk_state.gd" id="4_bsoco"]
+[ext_resource type="Script" uid="uid://c0m4topa44b0g" path="res://src/scripts/entities/player/states/player_run_state.gd" id="5_5etv0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k7lkm"]
+radius = 15.0
+height = 64.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3vwgm"]
+size = Vector2(32, 64)
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(923, 478)
+script = ExtResource("1_6kvpb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_k7lkm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_3vwgm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_ja0qc")
+initial_state = NodePath("PlayerIdleState")
+
+[node name="PlayerIdleState" type="Node" parent="StateMachine"]
+script = ExtResource("3_sjc18")
+
+[node name="PlayerWalkState" type="Node" parent="StateMachine"]
+script = ExtResource("4_bsoco")
+
+[node name="PlayerRunState" type="Node" parent="StateMachine"]
+script = ExtResource("5_5etv0")

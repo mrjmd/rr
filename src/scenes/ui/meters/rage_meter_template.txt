@@ -1,0 +1,44 @@
+# RageMeter Scene Structure Template
+# Create this scene in Godot editor with the following hierarchy:
+
+# RageMeter (Control) - Script: src/scripts/ui/meters/rage_meter.gd
+# ├── VBoxContainer
+# │   ├── Label (name: Label)
+# │   │   ├── Text: "RAGE"
+# │   │   ├── AutoWrap: false
+# │   │   ├── Horizontal Alignment: Center
+# │   └── ProgressContainer (Control)
+# │       ├── Layout: Full Rect
+# │       ├── ProgressBar (name: ProgressBar)
+# │       │   ├── Min Value: 0
+# │       │   ├── Max Value: 100
+# │       │   ├── Step: 0.1
+# │       │   ├── Value: 0
+# │       │   └── Size: 200x20
+# │       └── ThresholdMarkers (Control)
+# │           └── Layout: Full Rect over ProgressBar
+# └── Tween (name: Tween)
+
+# Control Node Settings:
+# - Anchor: Top Left
+# - Size: 220x50
+# - Minimum Size: 220x50
+
+# VBoxContainer Settings:
+# - Layout: Full Rect
+# - Separation: 5
+
+# Label Settings:
+# - Size Flags Horizontal: Fill
+# - AutoWrap: false
+# - Horizontal Alignment: Center
+
+# ProgressContainer Settings:
+# - Layout: Fill
+# - Size: 200x20
+
+# ProgressBar Settings:
+# - Custom StyleBox for "background" and "fill"
+# - Size Flags: Expand Fill (both H and V)
+
+# Save as: src/scenes/ui/meters/rage_meter.tscn

@@ -1,0 +1,36 @@
+# Test UI Scene Template
+# Create this scene in Godot editor for testing UI components:
+
+# TestUIScene (Control) - Script: src/scripts/ui/test_ui_scene.gd
+# ├── GameHUD (instance of game_hud.tscn)
+# │   └── Name: GameHUD
+# ├── UIInitializer (Node) - Script: src/scripts/ui/ui_initializer.gd
+# │   └── Name: UIInitializer
+# └── Background (ColorRect) [Optional]
+#     ├── Layout: Full Rect
+#     ├── Color: Dark gray (for contrast)
+#     └── Mouse Filter: Ignore
+
+# Main Control Settings:
+# - Layout: Full Rect
+# - Anchor: Full Rect (0,0,1,1)
+
+# GameHUD Instance Settings:
+# - Layout: Full Rect
+# - Should automatically position itself in top-left
+
+# Instructions for testing:
+# 1. Create the GameHUD scene first
+# 2. Instance it in this test scene
+# 3. Run the scene to test the UI components
+# 4. Use debug keys to test functionality:
+#    - 1: Increase rage
+#    - 2: Suppress rage (shows reservoir)
+#    - 3: Increase overwhelm
+#    - F1: Toggle HUD visibility
+#    - F2: Toggle debug panel
+#    - Enter: Cycle through threshold levels
+#    - Escape: Reset all values
+
+# Save as: src/scenes/ui/test_ui_scene.tscn
+# Set as main scene for testing: Scene > Project Settings > Application > Run > Main Scene
