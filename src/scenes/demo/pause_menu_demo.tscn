@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7n8m9o0p1q2r"]
+
+[ext_resource type="Script" path="res://src/scripts/demo/pause_menu_demo.gd" id="1_pause_menu_demo"]
+[ext_resource type="PackedScene" uid="uid://c5j8k9l2m3n4p" path="res://src/scenes/ui/menus/pause_menu.tscn" id="2_pause_menu"]
+
+[node name="PauseMenuDemo" type="Control" groups=["demo_scenes"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_pause_menu_demo")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.2, 0.3, 0.5, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Pause Menu Demo"
+horizontal_alignment = 1
+
+[node name="InstructionsLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Press ESC or P to open pause menu"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Game Running - Timer: 0.00s"
+horizontal_alignment = 1
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_pause_menu")]

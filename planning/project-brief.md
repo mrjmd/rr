@@ -23,3 +23,10 @@ Melancholy, tense, introspective, with flashes of rage, dark humor, and fragile 
 
 ## Core Conflict
 The Player's internal battle to remain conscious, present, and authentic in an environment that demands dissociation, performance, and repression, versus the family's collective inertia pulling everyone back into their assigned roles.
+
+## Slogans / Taglines
+
+- Don't let it overflow.
+- Break the pattern. Or it will break you.
+- Love is a cluttered room.
+- Where silence speaks volumes.

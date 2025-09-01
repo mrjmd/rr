@@ -7,7 +7,7 @@ var is_transitioning: bool = false
 
 # Scene paths mapping
 const SCENES = {
-	"main_menu": "res://src/scenes/main_menu.tscn",
+	"main_menu": "res://src/scenes/ui/menus/main_menu_simple.tscn",
 	"airport_montage": "res://src/scenes/day1/airport_montage/montage_controller.tscn",
 	"parking_garage": "res://src/scenes/day1/parking_garage/parking_garage.tscn",
 	"car_drive": "res://src/scenes/day1/car_drive/car_drive.tscn",
