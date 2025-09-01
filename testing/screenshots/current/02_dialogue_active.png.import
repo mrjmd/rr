@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bteg8u00hox4u"
-path="res://.godot/imported/simple_proof_04_cyan_restored.png-31e8394f27d81d4414158f7a652efca2.ctex"
+uid="uid://c3xe6omlnl35w"
+path="res://.godot/imported/02_dialogue_active.png-3fa5c139730d1a84396ca636d3380091.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://test_screenshots/simple_proof_04_cyan_restored.png"
-dest_files=["res://.godot/imported/simple_proof_04_cyan_restored.png-31e8394f27d81d4414158f7a652efca2.ctex"]
+source_file="res://testing/screenshots/current/02_dialogue_active.png"
+dest_files=["res://.godot/imported/02_dialogue_active.png-3fa5c139730d1a84396ca636d3380091.ctex"]
 
 [params]
 

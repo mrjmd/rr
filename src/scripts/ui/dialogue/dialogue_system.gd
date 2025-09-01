@@ -238,9 +238,7 @@ func show_dialogue() -> void:
 	# Force DialogueBox to be visible as well  
 	if dialogue_box:
 		dialogue_box.visible = true
-		dialogue_box.modulate = Color.TRANSPARENT
-		var fade_tween = create_tween()
-		fade_tween.tween_property(dialogue_box, "modulate", Color.WHITE, 0.3)
+		dialogue_box.modulate = Color.WHITE
 	
 	# Adjust HUD for dialogue mode
 	_set_hud_dialogue_mode(true)

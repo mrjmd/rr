@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://25hqaakvgwvf"
-path="res://.godot/imported/fade_debug_04_after_hide.png-659399e2794a071111f0c1cba063b98c.ctex"
+uid="uid://dxidb1ar6t2bq"
+path="res://.godot/imported/godot_capture_1756751047.png-50bfcbffb2a44bcd50ef27cfdea31f8c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://test_screenshots/fade_debug_04_after_hide.png"
-dest_files=["res://.godot/imported/fade_debug_04_after_hide.png-659399e2794a071111f0c1cba063b98c.ctex"]
+source_file="res://testing/screenshots/current/godot_capture_1756751047.png"
+dest_files=["res://.godot/imported/godot_capture_1756751047.png-50bfcbffb2a44bcd50ef27cfdea31f8c.ctex"]
 
 [params]
 

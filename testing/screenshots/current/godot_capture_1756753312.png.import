@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hrvaxsdi1pyb"
-path="res://.godot/imported/simple_proof_03_black_overlay_held.png-8f6becf3bb6c69bbefd55aadb9512d88.ctex"
+uid="uid://viihd45kym0f"
+path="res://.godot/imported/godot_capture_1756753312.png-e939aa6ae954b4f8e5a3d3008f73726b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://test_screenshots/simple_proof_03_black_overlay_held.png"
-dest_files=["res://.godot/imported/simple_proof_03_black_overlay_held.png-8f6becf3bb6c69bbefd55aadb9512d88.ctex"]
+source_file="res://testing/screenshots/current/godot_capture_1756753312.png"
+dest_files=["res://.godot/imported/godot_capture_1756753312.png-e939aa6ae954b4f8e5a3d3008f73726b.ctex"]
 
 [params]
 

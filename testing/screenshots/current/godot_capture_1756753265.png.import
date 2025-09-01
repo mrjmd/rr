@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cc0iymm0vrt4f"
-path="res://.godot/imported/fade_test_initial.png-2c3bc1a3e3dd1cfea57f88c7e8847067.ctex"
+uid="uid://cs4yuoa87s4ky"
+path="res://.godot/imported/godot_capture_1756753265.png-f3bd28efbaa21cc7dc33fbb68fbfe61c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://test_screenshots/fade_test_initial.png"
-dest_files=["res://.godot/imported/fade_test_initial.png-2c3bc1a3e3dd1cfea57f88c7e8847067.ctex"]
+source_file="res://testing/screenshots/current/godot_capture_1756753265.png"
+dest_files=["res://.godot/imported/godot_capture_1756753265.png-f3bd28efbaa21cc7dc33fbb68fbfe61c.ctex"]
 
 [params]
 

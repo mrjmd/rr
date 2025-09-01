@@ -76,6 +76,20 @@ This system introduces a core conflict between the protagonist's personal value 
 (See `planning/dream-sequences.md` for full details)
 Nightly symbolic vignettes that reflect the player's choices and stats from the previous day. The player reflects on these dreams upon waking to gain small boons for the day ahead.
 
+### f. Work Pressure System
+This system represents the constant, intrusive pressure of the protagonist's remote work responsibilities, acting as a major source of stress and a tool for avoidance.
+
+- **The Trigger:** At scripted intervals, a phone buzz/email notification sound occurs, and a persistent UI element appears, indicating a pending work task.
+- **The Dilemma:** The player can choose to ignore the notification, but doing so increases the chance of a follow-up "angry" notification that causes a direct spike to the **Rage Meter**. To engage, the player must physically move to their laptop.
+- **"Work Mode" Mini-Games:** Interacting with the laptop initiates a short, stressful mini-game.
+    - **Example (Email Triage):** A timed challenge to quickly categorize emails, where mistakes have future consequences.
+    - **Example (Customer Call):** A dialogue tree to de-escalate an issue with a client.
+- **The Interruption Mechanic:** While in "Work Mode," the family's needs continue. The daughter's **Fuss Meter** might appear, or a family member might interrupt with a question, forcing the player to rapidly context-switch and increasing the chance of errors.
+- **Consequences & Trade-Offs:**
+    - Engaging with work always increases the **Overwhelm Meter**.
+    - Successfully completing a task might offer a brief, temporary reduction in the Overwhelm fill rate.
+    - Most importantly, work becomes a new avoidance tool. A dialogue option like `[Look at phone] "Sorry, I have to take this..."` allows Rando to escape a conversation. This is a **DEFLECTOR** pattern that avoids the immediate conflict but fills the **Reservoir Meter**.
+
 ## 5. Future Development & Evolution
 
 This section captures brainstorming and feedback for future mechanical and narrative development.

@@ -50,25 +50,43 @@ func _ready() -> void:
 
 func _setup_styling() -> void:
 	"""Configure visual styling for the dialogue box"""
+	
 	if background_panel:
-		# Create custom StyleBox for background
-		var style_box = StyleBoxFlat.new()
-		style_box.bg_color = background_color
-		style_box.corner_radius_bottom_left = corner_radius
-		style_box.corner_radius_bottom_right = corner_radius
-		style_box.corner_radius_top_left = corner_radius
-		style_box.corner_radius_top_right = corner_radius
-		style_box.content_margin_left = padding.x
-		style_box.content_margin_right = padding.x
-		style_box.content_margin_top = padding.y
-		style_box.content_margin_bottom = padding.y
 		
-		# Apply shadow effect
-		style_box.shadow_color = Color(0, 0, 0, 0.5)
-		style_box.shadow_size = 4
-		style_box.shadow_offset = Vector2(2, 2)
+		# Get existing StyleBox from scene configuration and modify it
+		var style_box = background_panel.get_theme_stylebox("panel")
 		
-		background_panel.add_theme_stylebox_override("panel", style_box)
+		if not style_box:
+			# Fallback: Create custom StyleBox if none exists
+			style_box = StyleBoxFlat.new()
+			style_box.bg_color = background_color
+			
+			style_box.corner_radius_bottom_left = corner_radius
+			style_box.corner_radius_bottom_right = corner_radius
+			style_box.corner_radius_top_left = corner_radius
+			style_box.corner_radius_top_right = corner_radius
+			
+			# Add border and shadow
+			if style_box is StyleBoxFlat:
+				var flat_style = style_box as StyleBoxFlat
+				flat_style.border_width_left = 2
+				flat_style.border_width_top = 2
+				flat_style.border_width_right = 2
+				flat_style.border_width_bottom = 2
+				flat_style.border_color = Color(0.4, 0.4, 0.5, 1)
+				flat_style.shadow_color = Color(0, 0, 0, 0.5)
+				flat_style.shadow_size = 4
+				flat_style.shadow_offset = Vector2(2, 2)
+			
+			background_panel.add_theme_stylebox_override("panel", style_box)
+			
+		else:
+			pass
+		
+		# Ensure the panel is visible
+		background_panel.visible = true
+		background_panel.modulate = Color.WHITE
+		
 	
 	# Configure speaker label
 	if speaker_label:
@@ -83,6 +101,7 @@ func _setup_styling() -> void:
 		dialogue_text.scroll_active = false
 		dialogue_text.bbcode_enabled = true
 		dialogue_text.add_theme_font_size_override("normal_font_size", 16)
+	
 
 func _initialize_components() -> void:
 	"""Initialize dialogue box components"""
@@ -120,6 +139,7 @@ func _on_gui_input(event: InputEvent) -> void:
 
 func show_dialogue(speaker_name: String, text: String) -> void:
 	"""Display dialogue with speaker name and text"""
+	
 	# Set speaker name
 	if speaker_label:
 		speaker_label.text = speaker_name
@@ -143,6 +163,7 @@ func show_dialogue(speaker_name: String, text: String) -> void:
 	
 	# Start typing animation
 	_start_typing_animation()
+	
 	
 	if OS.is_debug_build():
 		print("DialogueBox: Showing dialogue - Speaker: '", speaker_name, "' Text length: ", text.length())
