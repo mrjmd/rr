@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(godot:*)",
+      "Bash(git:*)",
+      "Bash(tree:*)",
+      "Bash(cat:*)",
+      "Bash(chmod:*)",
+      "WebSearch",
+      "WebFetch(domain:docs.godotengine.org)",
+      "WebFetch(domain:github.com)",
+      "Read(/Users/matt/Projects/randos-reservoir/**)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '📝 Task started:' >> .claude/todos/session.log && date >> .claude/todos/session.log"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/enforce-todo-tracking.sh",
+            "timeout": 3
+          },
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/check-godot-patterns.sh",
+            "timeout": 3
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/enforce-todo-tracking.sh",
+            "timeout": 3
+          },
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/check-godot-patterns.sh",
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "TodoWrite",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/persist-todos.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/session-recovery.sh"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/session-save.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
