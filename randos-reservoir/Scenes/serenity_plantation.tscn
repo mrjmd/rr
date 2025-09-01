@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4bdx5r3xhdd4"]
+
+[ext_resource type="Script" uid="uid://b158haaxskt07" path="res://Scripts/rando.gd" id="1_dyg16"]
+[ext_resource type="Texture2D" uid="uid://uymvch0hidbk" path="res://icon.svg" id="2_c2vu2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c2vu2"]
+
+[node name="Serenity Plantation" type="Node2D"]
+
+[node name="Rando" type="CharacterBody2D" parent="."]
+position = Vector2(528, 322)
+script = ExtResource("1_dyg16")
+
+[node name="Icon" type="Sprite2D" parent="Rando"]
+position = Vector2(3.8147e-06, 0)
+scale = Vector2(0.398438, 0.398438)
+texture = ExtResource("2_c2vu2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rando"]
+shape = SubResource("CapsuleShape2D_c2vu2")
