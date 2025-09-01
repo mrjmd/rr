@@ -20,11 +20,15 @@
 3. **godot-specialist agent** → Implement Godot-specific features
 4. **scene-builder agent** → Handle scene composition and node hierarchies
 5. **shader-specialist agent** → Create visual effects when needed
+6. **godot-tester agent** → Verify implementation with screenshots (AUTOMATIC after completion!)
 
 **ENFORCEMENT HOOKS ACTIVE:**
 - **enforce-todo-tracking.sh** - BLOCKS Write/Edit if todo-manager not invoked recently
 - **check-godot-patterns.sh** - Ensures GDScript conventions are followed
+- **enforce-testing.sh** - BLOCKS progress if completed task not verified
+- **post-implementation-test.sh** - Auto-triggers testing after game file modifications
 - Todo tracking is MANDATORY - you cannot write code without it
+- Testing is MANDATORY - you cannot proceed without verification
 
 ### 🤖 AGENT INVOCATION IS MANDATORY
 
@@ -52,6 +56,8 @@ When user requests ANY feature or fix:
 | Animation | godot-specialist | scene-builder |
 | Complex Analysis | deep-research | claude-code-expert |
 | Project Setup | claude-code-expert | todo-manager |
+| **Testing/Verification** | **godot-tester** | **AUTOMATIC** |
+| **Bug Fixing** | **godot-tester → specialist** | **deep-research** |
 
 ## 🎮 Godot 4 Project Architecture
 
@@ -518,6 +524,57 @@ All todos are automatically saved to `.claude/todos/current.md` after every upda
 - Current feature's script files
 - Related scene files
 
+## ✅ AUTOMATED VERIFICATION WORKFLOW
+
+### After EVERY Implementation:
+
+1. **Automatic Testing Trigger**
+   - Hooks detect completed tasks or file modifications
+   - godot-tester agent launches automatically
+   - BLOCKS further progress until verified
+
+2. **Verification Process**
+   ```bash
+   # Run full verification suite
+   .claude/scripts/run_verification.sh
+   ```
+
+3. **What Gets Tested:**
+   - Project structure validity
+   - Asset import success
+   - Game launches without crashes
+   - Screenshots captured at key moments
+   - Console errors detected and reported
+   - Performance metrics logged
+
+4. **Test Outputs:**
+   - `test_screenshots/` - Visual proof of functionality
+   - `test_report.txt` - Human-readable report
+   - `test_results.json` - Machine-parsable results
+   - `verification.log` - Full debug output
+
+5. **Failure Protocol:**
+   - If tests fail → godot-tester identifies issue
+   - Delegates to appropriate specialist for fixes
+   - Re-runs verification after fixes
+   - Cycle continues until PASS
+
+### Quick Verification Commands:
+
+```bash
+# Run automated test script
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path /Users/matt/Projects/randos-reservoir --script scripts/test_automation.gd
+
+# Run full verification pipeline
+.claude/scripts/run_verification.sh
+
+# Quick visual check (launches game)
+/Applications/Godot.app/Contents/MacOS/Godot --path /Users/matt/Projects/randos-reservoir
+
+# Capture screenshot while running
+screencapture -x test_screenshot.png
+```
+
 ## 🏁 Quick Start Checklist
 
 When implementing a new feature:
@@ -529,6 +586,9 @@ When implementing a new feature:
 - [ ] Create reusable scene components
 - [ ] Add to appropriate node groups
 - [ ] Write GUT tests if applicable
+- [ ] **Run godot-tester verification (AUTOMATIC)**
+- [ ] **Review screenshot proof of functionality**
+- [ ] **Fix any errors found by tester**
 - [ ] Profile performance impact
 - [ ] Update documentation
 - [ ] Commit with descriptive message
