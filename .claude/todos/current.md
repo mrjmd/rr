@@ -1,56 +1,135 @@
 # Rando's Reservoir - Current Session TODOs
-*Last Updated: 2025-09-02 23:45*
+*Last Updated: 2025-09-02 23:55*
 *Session Started: 2025-09-02 23:45*
-*Project Phase: Game Features - Scene Implementation*
+*Project Phase: Planning & Architecture - Pre-Implementation*
+
+## 🎯 NEXT AGENT HANDOFF
+
+### Use: deep-research agent
+**Mission**: Thoroughly analyze all planning documents to understand business objectives and game design goals for Scene 4 implementation.
+
+**Key Questions to Answer**:
+1. What emotional states need to be tracked and how do they interact?
+2. What are the core gameplay loops and player decision points?
+3. How do meters affect gameplay and narrative outcomes?
+4. What are the success/failure conditions for each mechanic?
+5. How do all systems integrate to create the intended player experience?
+
+**Documents to Analyze**:
+- `/planning/scenes/day-1/04_evening_and_dream.md` (PRIMARY)
+- `/planning/core-gameplay-loop.md`
+- `/planning/responsibility-cascade.md`
+- `/planning/dream-sequences.md`
+- `/planning/endgame-and-integration-mechanics.md`
+
+**Deliverable**: Comprehensive analysis document that will inform technical specification creation.
 
 ## 🚀 Current Sprint Goal
-Implement Day 1 Scene 4 "Evening and Dream" - The core emotional mechanics with meter systems, baby interactions, and conditional gameplay based on player choices.
+**PLANNING PHASE**: Create comprehensive technical specification for Scene 4 implementation based on thorough understanding of business objectives and game design goals.
 
 ## 🔄 IN PROGRESS (Max 1 item)
-*Ready to start first task*
+*Ready to start planning phase*
 
 ## ✅ COMPLETED THIS SESSION
-*New session - ready for game features*
+*New session - menu system complete, ready for planning phase*
 
 ## 📋 PENDING (Priority Order)
-1. [ ] Design and implement meter system architecture (Rage, Overwhelm, Reservoir)
-   - Why: Core emotional tracking system needed for all gameplay
-   - Files: Create meter system singleton and UI components
-   - Depends on: Nothing - foundational system
+
+### Phase 1: Research & Analysis
+1. [ ] Deep research planning documents to understand business objectives
+   - Start: /planning/scenes/day-1/04_evening_and_dream.md
+   - Review: /planning/core-gameplay-loop.md
+   - Review: /planning/responsibility-cascade.md  
+   - Review: /planning/dream-sequences.md
+   - Review: /planning/endgame-and-integration-mechanics.md
+   - Outcome: Clear understanding of emotional mechanics and player experience
+
+2. [ ] Analyze emotional mechanics and translate to technical requirements
+   - Map emotional states to data structures
+   - Define state transitions and triggers
+   - Identify UI/UX requirements for feedback
+   - Document player interaction patterns
    
-2. [ ] Create baby interaction system with Hold Baby status and Fuss Meter  
-   - Why: Central mechanic for Part 2 unpacking sequence
-   - Files: Baby controller, status system, timer mechanics
-   - Depends on: Meter system for Fuss Meter
+3. [ ] Create technical specification document with implementation plan
+   - Architecture diagrams for each system
+   - Data flow between components
+   - Scene structure and navigation
+   - Asset requirements list
    
-3. [ ] Implement Day 1 Scene 4 Part 2: One-Handed Burden unpacking mechanics
-   - Why: First major gameplay sequence to implement
-   - Files: Unpacking scene, interaction system, inventory management
-   - Depends on: Baby interaction system
+4. [ ] Define success criteria and testing strategy for each component
+   - Measurable outcomes for each mechanic
+   - Test scenarios and expected behaviors
+   - Screenshot verification points
+   - Performance benchmarks
+
+### Phase 2: Implementation (After Planning Complete)
+5. [ ] Implement emotional meter system architecture
+   - Core singleton for Rage/Overwhelm/Reservoir tracking
+   - Event system for meter updates
+   - Save/load state persistence
    
-4. [ ] Build conditional sanctuary bedtime minigame with rhythm mechanics
-   - Why: Major "Island of Peace" mechanic with conditional outcomes
-   - Files: Rhythm game controller, audio system integration
-   - Depends on: Meter system to check for "Rage Leak" conditions
+6. [ ] Build baby interaction system with hold/fuss mechanics
+   - Hold Baby status management
+   - Fuss Meter with timer mechanics
+   - One-handed gameplay restrictions
    
-5. [ ] Create dream framework with meter-based visual/audio modifiers
-   - Why: Ending sequence that reflects player's emotional state
-   - Files: Dream scene, visual effects, audio modulation
-   - Depends on: Meter system for dream state modification
+7. [ ] Create unpacking mechanics with resource management
+   - Item interaction system
+   - Inventory management
+   - Progress tracking
+   
+8. [ ] Implement bedtime minigame with conditional logic
+   - Rhythm game mechanics
+   - Conditional activation based on emotional state
+   - Multiple outcome paths
+   
+9. [ ] Build dream framework with meter-influenced experience
+   - Visual modifiers based on emotional state
+   - Audio modulation system
+   - Narrative branching
+
+10. [ ] Integration testing of all Scene 4 components
+    - Full playthrough testing
+    - Edge case validation
+    - Performance optimization
 
 ## 🔍 RECOVERY CONTEXT
 ### Currently Working On
-- **Task**: Ready to start meter system architecture
-- **File**: Will create new meter system files
-- **Problem**: Need foundational emotional tracking for all game mechanics
-- **Solution**: Create singleton-based meter system with UI integration
+- **Task**: Planning phase - deep research of planning documents
+- **Next Agent**: deep-research agent to analyze all planning docs
+- **Deliverable**: Technical specification document for Scene 4
+- **Approach**: Understand business objectives first, then translate to technical requirements
 
 ### Key Decisions This Session
-- Ready to make first decisions for game feature implementation
+- Established planning-first approach before implementation
+- Will create comprehensive technical spec before coding
 
-### Files to Create/Modify
+### Key Planning Documents to Research
+- `/planning/scenes/day-1/04_evening_and_dream.md` - Scene 4 detailed breakdown
+- `/planning/core-gameplay-loop.md` - Core mechanics and player experience
+- `/planning/responsibility-cascade.md` - Emotional mechanics framework
+- `/planning/dream-sequences.md` - Dream state system design
+- `/planning/endgame-and-integration-mechanics.md` - Overall game integration
+
+### Expected Deliverables from Planning Phase
+1. **Technical Specification Document** (`/planning/technical-spec-scene4.md`)
+   - System architecture diagrams
+   - Component interaction flows
+   - Data structures and state management
+   - Event system design
+   - UI/UX requirements
+
+2. **Implementation Roadmap**
+   - Dependency graph
+   - Step-by-step build order
+   - Testing checkpoints
+   - Risk assessment
+
+### Files to Create/Modify (After Planning)
 - `globals/meter_system.gd` - Core emotional meter tracking
 - `src/scripts/ui/meters/` - UI components for meter display
+- `src/scripts/systems/baby_system.gd` - Baby interaction mechanics
+- `src/scenes/day1/scene4/` - Scene 4 implementation files
 - `src/scenes/gameplay/day1_scene4/` - Scene implementation
 - `src/scripts/gameplay/baby_interaction.gd` - Baby holding mechanics
 
