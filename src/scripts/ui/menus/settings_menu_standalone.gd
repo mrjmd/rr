@@ -43,6 +43,10 @@ var current_settings: Dictionary = {
 	"vsync": true
 }
 
+# Audio feedback state
+var last_slider_sound_time: float = 0.0
+var slider_sound_cooldown: float = 0.1  # Prevent audio spam while dragging
+
 func _ready() -> void:
 	# Set layer
 	layer = 225
@@ -262,10 +266,26 @@ func _update_volume_label(label: Label, value: float) -> void:
 	if label:
 		label.text = str(int(value * 100)) + "%"
 
+# Audio feedback methods
+func _play_slider_sound() -> void:
+	"""Play sound for slider interaction with debouncing"""
+	var current_time = Time.get_ticks_msec() / 1000.0
+	if current_time - last_slider_sound_time >= slider_sound_cooldown:
+		if AudioManager:
+			AudioManager.play_ui_sound("ui_hover", -10.0)  # Quieter for sliders
+		last_slider_sound_time = current_time
+
+func _play_checkbox_sound() -> void:
+	"""Play sound for checkbox toggle"""
+	if AudioManager:
+		AudioManager.play_ui_sound("ui_click")
+
 # Signal Handlers
 
 func _on_master_volume_changed(value: float) -> void:
 	"""Handle master volume change"""
+	_play_slider_sound()
+	
 	current_settings.master_volume = value
 	_update_volume_label(master_volume_value, value)
 	
@@ -279,6 +299,8 @@ func _on_master_volume_changed(value: float) -> void:
 
 func _on_music_volume_changed(value: float) -> void:
 	"""Handle music volume change"""
+	_play_slider_sound()
+	
 	current_settings.music_volume = value
 	_update_volume_label(music_volume_value, value)
 	
@@ -292,6 +314,8 @@ func _on_music_volume_changed(value: float) -> void:
 
 func _on_sfx_volume_changed(value: float) -> void:
 	"""Handle SFX volume change"""
+	_play_slider_sound()
+	
 	current_settings.sfx_volume = value
 	_update_volume_label(sfx_volume_value, value)
 	
@@ -305,6 +329,8 @@ func _on_sfx_volume_changed(value: float) -> void:
 
 func _on_fullscreen_toggled(button_pressed: bool) -> void:
 	"""Handle fullscreen toggle"""
+	_play_checkbox_sound()
+	
 	current_settings.fullscreen = button_pressed
 	
 	# Apply immediately
@@ -317,6 +343,8 @@ func _on_fullscreen_toggled(button_pressed: bool) -> void:
 
 func _on_vsync_toggled(button_pressed: bool) -> void:
 	"""Handle VSync toggle"""
+	_play_checkbox_sound()
+	
 	current_settings.vsync = button_pressed
 	
 	# Apply immediately

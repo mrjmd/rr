@@ -128,6 +128,10 @@ func open_menu(menu_name: String, use_transition: bool = true) -> void:
 			print("MenuManager: Menu already open: ", menu_name)
 		return
 	
+	# Play transition sound
+	if use_transition and AudioManager:
+		AudioManager.play_ui_sound("ui_transition")
+	
 	# Get or load menu instance
 	var menu_instance = _get_or_load_menu(menu_name)
 	if not menu_instance:
@@ -193,6 +197,10 @@ func close_current_menu(use_transition: bool = true) -> void:
 
 func go_back() -> void:
 	"""Navigate back to the previous menu in the stack"""
+	# Play back sound
+	if AudioManager:
+		AudioManager.play_ui_sound("ui_back")
+	
 	if menu_stack.size() <= 1:
 		# No previous menu, close current
 		close_current_menu()

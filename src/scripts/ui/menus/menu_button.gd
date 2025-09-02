@@ -34,6 +34,8 @@ var button_data: Dictionary = {}
 @export var hover_scale: Vector2 = Vector2(1.05, 1.05)
 @export var press_scale: Vector2 = Vector2(0.95, 0.95)
 @export var animation_duration: float = 0.2
+@export var hover_glow_strength: float = 0.2
+@export var press_feedback_duration: float = 0.1
 
 # Internal state
 var _is_hovering: bool = false
@@ -177,6 +179,28 @@ func set_button_data(name: String, action: String = "", data: Dictionary = {}) -
 	if OS.is_debug_build():
 		print("MenuButton data set: ", button_name, " with action: ", button_action)
 
+# Public methods for specific button types
+func trigger_back_button() -> void:
+	"""Trigger this button as a back/cancel button with appropriate sound"""
+	_play_back_sound()
+	flash_selection()
+	pressed.emit()
+
+func trigger_confirm_button() -> void:
+	"""Trigger this button as a confirm button with appropriate sound"""
+	_play_confirm_sound()
+	flash_selection()
+	pressed.emit()
+
+func trigger_error_feedback() -> void:
+	"""Show error feedback without triggering the button"""
+	_play_error_sound()
+	# Add red flash for error
+	_stop_current_animation()
+	_current_tween = create_tween()
+	_current_tween.tween_property(self, "modulate", Color(1.8, 0.8, 0.8, 1.0), 0.1)
+	_current_tween.tween_property(self, "modulate", Color.WHITE, 0.4)
+
 func get_button_data() -> Dictionary:
 	"""Get button data"""
 	return button_data
@@ -200,6 +224,9 @@ func animate_hover_enter() -> void:
 	
 	# Scale animation
 	_current_tween.tween_property(self, "scale", _original_scale * hover_scale, animation_duration)
+	# Subtle glow effect via modulation
+	var glow_color = Color(1.0 + hover_glow_strength, 1.0 + hover_glow_strength, 1.0 + hover_glow_strength, 1.0)
+	_current_tween.tween_property(self, "modulate", glow_color, animation_duration)
 	_current_tween.tween_method(_update_hover_progress, 0.0, 1.0, animation_duration)
 
 func animate_hover_exit() -> void:
@@ -211,6 +238,8 @@ func animate_hover_exit() -> void:
 	
 	# Scale animation back to normal
 	_current_tween.tween_property(self, "scale", _original_scale, animation_duration)
+	# Remove glow effect
+	_current_tween.tween_property(self, "modulate", Color.WHITE, animation_duration)
 	_current_tween.tween_method(_update_hover_progress, 1.0, 0.0, animation_duration)
 
 func animate_press() -> void:
@@ -220,9 +249,14 @@ func animate_press() -> void:
 	_current_tween = create_tween()
 	_current_tween.set_parallel(true)
 	
-	# Quick press animation
-	_current_tween.tween_property(self, "scale", _original_scale * press_scale, animation_duration * 0.5)
-	_current_tween.tween_property(self, "scale", _original_scale * hover_scale, animation_duration * 0.5).set_delay(animation_duration * 0.5)
+	# Quick press animation with immediate feedback
+	_current_tween.tween_property(self, "scale", _original_scale * press_scale, press_feedback_duration)
+	# Return to hover scale after press
+	_current_tween.tween_property(self, "scale", _original_scale * hover_scale, press_feedback_duration).set_delay(press_feedback_duration)
+	# Brief brightness increase on press
+	_current_tween.tween_property(self, "modulate", Color(1.3, 1.3, 1.3, 1.0), press_feedback_duration)
+	var glow_color = Color(1.0 + hover_glow_strength, 1.0 + hover_glow_strength, 1.0 + hover_glow_strength, 1.0)
+	_current_tween.tween_property(self, "modulate", glow_color, press_feedback_duration).set_delay(press_feedback_duration)
 
 func animate_focus() -> void:
 	"""Animate button when it gains focus"""
@@ -310,19 +344,32 @@ func _on_focus_exited() -> void:
 		scale = _original_scale
 	button_unfocused.emit(button_name)
 
-# Audio Methods (placeholders for future AudioManager integration)
+# Audio Methods
 
 func _play_selection_sound() -> void:
 	"""Play sound when button is selected"""
-	# This would integrate with AudioManager when available
-	# AudioManager.play_sfx("menu_select")
-	pass
+	if AudioManager:
+		AudioManager.play_ui_sound("ui_click")
 
 func _play_hover_sound() -> void:
 	"""Play sound when button is hovered"""
-	# This would integrate with AudioManager when available
-	# AudioManager.play_sfx("menu_hover")
-	pass
+	if AudioManager:
+		AudioManager.play_ui_sound("ui_hover")
+
+func _play_back_sound() -> void:
+	"""Play sound for back/cancel actions"""
+	if AudioManager:
+		AudioManager.play_ui_sound("ui_back")
+
+func _play_confirm_sound() -> void:
+	"""Play sound for confirm actions"""
+	if AudioManager:
+		AudioManager.play_ui_sound("ui_confirm")
+
+func _play_error_sound() -> void:
+	"""Play sound for error actions"""
+	if AudioManager:
+		AudioManager.play_ui_sound("ui_error")
 
 # Utility Methods
 

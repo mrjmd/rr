@@ -1,0 +1,118 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjfbve6hmdl6u"]
+
+[ext_resource type="Script" path="res://src/scripts/demo/menu_feedback_demo.gd" id="1_5f8jq"]
+[ext_resource type="Script" path="res://src/scripts/ui/menus/menu_button.gd" id="2_xk2kj"]
+
+[node name="MenuFeedbackDemo" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_5f8jq")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.1, 0.1, 0.15, 1)
+
+[node name="Container" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -250.0
+offset_right = 300.0
+offset_bottom = 250.0
+
+[node name="Title" type="Label" parent="Container"]
+layout_mode = 2
+text = "Menu Audio & Visual Feedback Demo"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Container"]
+layout_mode = 2
+
+[node name="Instructions" type="Label" parent="Container"]
+layout_mode = 2
+text = "Try hovering over, clicking, and using keyboard navigation on the buttons below.
+Watch for visual effects: scaling, glow, and different feedback for different button types."
+autowrap_mode = 3
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Container"]
+layout_mode = 2
+
+[node name="ButtonContainer" type="VBoxContainer" parent="Container"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="NormalButton" type="Button" parent="Container/ButtonContainer"]
+layout_mode = 2
+text = "Normal Click Button"
+script = ExtResource("2_xk2kj")
+
+[node name="ConfirmButton" type="Button" parent="Container/ButtonContainer"]
+layout_mode = 2
+text = "Confirm Button"
+script = ExtResource("2_xk2kj")
+
+[node name="BackButton" type="Button" parent="Container/ButtonContainer"]
+layout_mode = 2
+text = "Back Button"
+script = ExtResource("2_xk2kj")
+
+[node name="ErrorButton" type="Button" parent="Container/ButtonContainer"]
+layout_mode = 2
+text = "Error Trigger Button"
+script = ExtResource("2_xk2kj")
+
+[node name="HSeparator3" type="HSeparator" parent="Container"]
+layout_mode = 2
+
+[node name="SliderContainer" type="VBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="SliderLabel" type="Label" parent="Container/SliderContainer"]
+layout_mode = 2
+text = "Test Volume Slider (with audio feedback):"
+
+[node name="TestSlider" type="HSlider" parent="Container/SliderContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 1.0
+step = 0.01
+value = 0.75
+
+[node name="SliderValue" type="Label" parent="Container/SliderContainer"]
+layout_mode = 2
+text = "75%"
+horizontal_alignment = 1
+
+[node name="HSeparator4" type="HSeparator" parent="Container"]
+layout_mode = 2
+
+[node name="CheckboxContainer" type="VBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="TestCheckbox" type="CheckBox" parent="Container/CheckboxContainer"]
+layout_mode = 2
+text = "Test Checkbox (with audio feedback)"
+
+[node name="HSeparator5" type="HSeparator" parent="Container"]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="Container"]
+layout_mode = 2
+text = "Status: Ready"
+horizontal_alignment = 1
+
+[node name="BackToMenuButton" type="Button" parent="Container"]
+layout_mode = 2
+text = "Back to Main Menu"
+script = ExtResource("2_xk2kj")
