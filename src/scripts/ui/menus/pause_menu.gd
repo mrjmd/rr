@@ -214,12 +214,16 @@ func _handle_resume_game() -> void:
 func _handle_open_settings() -> void:
 	"""Handle settings button press"""
 	if OS.is_debug_build():
-		print("Opening settings from pause menu...")
+		print("PauseMenu: _handle_open_settings() called")
 	
 	# Use MenuManager to open settings
 	if MenuManager:
+		if OS.is_debug_build():
+			print("PauseMenu: Calling MenuManager.open_menu('settings_menu', true)")
 		MenuManager.open_menu("settings_menu", true)
 	else:
+		if OS.is_debug_build():
+			print("PauseMenu: No MenuManager, using navigate_to_menu fallback")
 		# Fallback to BaseMenu navigation
 		navigate_to_menu("settings_menu")
 

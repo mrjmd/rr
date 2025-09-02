@@ -1,177 +1,129 @@
 # Rando's Reservoir - Current Session TODOs
-*Last Updated: 2025-09-02 14:35*
-*Session Started: 2025-09-02 14:30*
-*Project Phase: Prototype - CRITICAL RECOVERY MODE*
-
-## 🚨 CRITICAL SESSION RECOVERY - ALL MENUS BROKEN
-
-**Previous session made FALSE CLAIMS about menu completion without visual verification**
-**ALL menu systems are currently BROKEN and need complete fixing with proper testing**
+*Last Updated: 2025-09-02 23:45*
+*Session Started: 2025-09-02 23:45*
+*Project Phase: Game Features - Scene Implementation*
 
 ## 🚀 Current Sprint Goal
-**EMERGENCY RECOVERY**: Fix all broken menu systems with MANDATORY visual verification using godot-tester agent. NO CLAIMS without screenshot proof.
-
-## 🚨 HANDOFF DOCUMENTATION FOR NEXT AGENT
-
-### CRITICAL BROKEN STATE
-The menu systems are COMPLETELY BROKEN after attempted fixes that were never tested:
-1. Main Menu (main_menu_simple.tscn) - Won't load properly  
-2. Pause Menu - ESC/P keys don't work at all
-3. Settings Menu - Untested, likely broken
-4. Navigation System - Untested, may have conflicts
-
-### WHAT WENT WRONG
-- Previous agent claimed fixes without visual verification
-- Made changes that broke previously working systems  
-- Did not use godot-tester agent as required
-- Zero screenshots provided as proof
-- Claimed completion of Week 5-6 menus when they're actually broken
-
-### MANDATORY REQUIREMENTS GOING FORWARD
-1. Use godot-tester agent for ALL menu work
-2. Capture screenshots at every step (before/during/after)
-3. Test actual functionality:
-   - Button clicks actually work
-   - ESC key navigation functions
-   - Scene transitions complete
-   - No console errors present
-4. NEVER claim completion without visual proof
-
-### FILES TO CHECK
-- src/scripts/ui/menus/main_menu_simple.gd - Recent changes broke loading
-- src/scripts/ui/menus/pause_menu_simple.gd - Input handling broken
-- globals/menu_manager.gd - May have integration issues
-- project.godot - Input actions may be misconfigured
-
-### RECOVERY STEPS
-1. First run each menu scene and capture error screenshots
-2. Check console output for specific errors
-3. Review recent git commits for breaking changes
-4. Test with godot-tester agent before any claims
-5. Provide screenshot proof of each fix
-
-This documentation ensures the next agent understands the critical state and requirements.
+Implement Day 1 Scene 4 "Evening and Dream" - The core emotional mechanics with meter systems, baby interactions, and conditional gameplay based on player choices.
 
 ## 🔄 IN PROGRESS (Max 1 item)
-*No tasks currently in progress - awaiting proper agent-based diagnosis*
+*Ready to start first task*
 
 ## ✅ COMPLETED THIS SESSION
-*No tasks completed yet - session just started in recovery mode*
+*New session - ready for game features*
 
 ## 📋 PENDING (Priority Order)
-1. [ ] Diagnose and document current broken menu state with screenshots
-   - Why: Must establish baseline of what's actually broken
-   - Depends on: godot-tester agent usage MANDATORY
-   - Requirements: Screenshots showing each failure mode
-2. [ ] Fix main menu loading issues (main_menu_simple.tscn)
-   - Why: Main menu doesn't load properly after recent "fixes"
-   - Depends on: Proper diagnosis first
-   - Requirements: Visual proof of menu loading successfully
-3. [ ] Fix pause menu input response (ESC/P keys not working)
-   - Why: ESC/P keys don't trigger pause menu at all
-   - Depends on: Main menu working first
-   - Requirements: Screenshots showing ESC key responding
-4. [ ] Test and fix settings menu functionality
-   - Why: Untested after other menu failures
-   - Depends on: Navigation system working
-   - Requirements: Full settings interaction screenshots
-5. [ ] Verify menu navigation system with visual proof
-   - Why: MenuManager may be causing conflicts
-   - Depends on: Individual menus working
-   - Requirements: Screenshots of complete navigation flows
+1. [ ] Design and implement meter system architecture (Rage, Overwhelm, Reservoir)
+   - Why: Core emotional tracking system needed for all gameplay
+   - Files: Create meter system singleton and UI components
+   - Depends on: Nothing - foundational system
+   
+2. [ ] Create baby interaction system with Hold Baby status and Fuss Meter  
+   - Why: Central mechanic for Part 2 unpacking sequence
+   - Files: Baby controller, status system, timer mechanics
+   - Depends on: Meter system for Fuss Meter
+   
+3. [ ] Implement Day 1 Scene 4 Part 2: One-Handed Burden unpacking mechanics
+   - Why: First major gameplay sequence to implement
+   - Files: Unpacking scene, interaction system, inventory management
+   - Depends on: Baby interaction system
+   
+4. [ ] Build conditional sanctuary bedtime minigame with rhythm mechanics
+   - Why: Major "Island of Peace" mechanic with conditional outcomes
+   - Files: Rhythm game controller, audio system integration
+   - Depends on: Meter system to check for "Rage Leak" conditions
+   
+5. [ ] Create dream framework with meter-based visual/audio modifiers
+   - Why: Ending sequence that reflects player's emotional state
+   - Files: Dream scene, visual effects, audio modulation
+   - Depends on: Meter system for dream state modification
 
 ## 🔍 RECOVERY CONTEXT
 ### Currently Working On
-- **Task**: Emergency diagnosis of broken menu systems
-- **File**: Need to identify which files are broken
-- **Problem**: Previous session claimed completion without visual verification
-- **Solution**: Complete testing-first rebuild with godot-tester agent
+- **Task**: Ready to start meter system architecture
+- **File**: Will create new meter system files
+- **Problem**: Need foundational emotional tracking for all game mechanics
+- **Solution**: Create singleton-based meter system with UI integration
 
-### Critical Issues Identified
-- **Main Menu**: main_menu_simple.tscn doesn't load properly
-- **Pause Menu**: ESC/P keys completely non-responsive  
-- **Settings Menu**: Untested but likely broken
-- **Navigation**: MenuManager may have broken existing functionality
-- **Testing**: Previous session provided ZERO screenshots of working features
+### Key Decisions This Session
+- Ready to make first decisions for game feature implementation
 
-### Files Suspected of Issues
-- `src/scenes/ui/menus/main_menu_simple.tscn` - Loading failures
-- `src/scripts/ui/menus/pause_menu.gd` - Input not responding
-- `globals/menu_manager.gd` - May be causing conflicts
-- All menu scripts modified in previous session without proper testing
+### Files to Create/Modify
+- `globals/meter_system.gd` - Core emotional meter tracking
+- `src/scripts/ui/meters/` - UI components for meter display
+- `src/scenes/gameplay/day1_scene4/` - Scene implementation
+- `src/scripts/gameplay/baby_interaction.gd` - Baby holding mechanics
 
 ### Commands to Resume
 ```bash
-# Diagnose current state with screenshots:
-/Applications/Godot.app/Contents/MacOS/Godot --path /Users/matt/Projects/randos-reservoir --script testing/scripts/diagnose_menu_state.gd
+# Continue with Godot editor:
+cd /Users/matt/Projects/randos-reservoir
+godot project.godot
 
-# Test main menu loading:
-/Applications/Godot.app/Contents/MacOS/Godot --path /Users/matt/Projects/randos-reservoir src/scenes/ui/menus/main_menu_simple.tscn
-
-# Test pause menu in game:
-/Applications/Godot.app/Contents/MacOS/Godot --path /Users/matt/Projects/randos-reservoir --script testing/scripts/test_pause_menu_inputs.gd
+# Test any gameplay features with F9:
+/Applications/Godot.app/Contents/MacOS/Godot --path /Users/matt/Projects/randos-reservoir --maximized
+# Then press F9 for automated testing when features are ready
 ```
 
-## 🎯 Definition of Done for Menu Recovery
-- [ ] ALL menu issues diagnosed with screenshot evidence
-- [ ] Main menu loads and displays correctly (screenshot proof)
-- [ ] ESC/P keys trigger pause menu (screenshot proof)
-- [ ] Settings menu fully functional (screenshot proof)
-- [ ] Menu navigation works between all screens (screenshot proof)
-- [ ] godot-tester agent used for ALL testing
-- [ ] Before/during/after screenshots captured for all fixes
-- [ ] No console errors during any menu operations
+## 🎯 Definition of Done for Current Phase
+- [ ] All three meters (Rage, Overwhelm, Reservoir) working with UI display
+- [ ] Baby interaction system allows one-handed vs two-handed actions
+- [ ] Fuss Meter timer system works correctly
+- [ ] Unpacking sequence playable with proper challenge balance
+- [ ] Bedtime minigame has two difficulty modes based on prior player choices
+- [ ] Dream sequence reflects meter states with appropriate audio/visual changes
+- [ ] All systems tested with screenshots and manual verification
 
 ## 📝 Session Notes
-- 14:30: **CRITICAL RECOVERY SESSION STARTED** - Previous claims were false
-- Previous session VIOLATED core project rules by claiming completion without visual proof
-- ALL menu "fixes" need to be verified or reverted
-- MANDATORY: Use godot-tester agent for all testing going forward
-- MANDATORY: Screenshot proof required before any completion claims
+- 23:45: Archived completed menu infrastructure work
+- 23:45: Set up new session focused on actual game features
+- Reference: Day 1 Scene 4 planning in `/planning/scenes/day-1/04_evening_and_dream.md`
 
 ## ⚠️ Blockers & Issues
-- [ ] **CRITICAL**: Previous session broke working menu systems
-  - Tried: Making claims without verification (FAILED)
-  - Need: Complete testing-first rebuild approach
-- [ ] **PROCESS**: Must use godot-tester agent for all menu work
-  - Tried: Bypassing verification requirements (FAILED) 
-  - Need: Strict adherence to visual verification rules
+*None currently - all infrastructure complete and ready for feature development*
 
 ## 🔜 Next Session Priority
-After fixing all broken menus with visual verification:
-1. Establish new verification checkpoints for all future work
-2. Create automated testing pipeline to prevent future regressions
-3. Only then consider new features - NO NEW WORK until menus are fixed
+After completing meter system architecture:
+1. Focus on baby interaction mechanics as the core challenge
+2. Build unpacking sequence as first major gameplay
+3. Implement conditional bedtime experience
 
-## 📊 ACTUAL DEVELOPMENT STATUS
-- Week 1-2: Foundation ✅
-- Week 3-4: Dialogue system ✅ (dialogue_triggered.png proves it works)
-- Week 5-6: Initial menu creation ✅ (had visual proof initially)
-- **Week 5-6 "COMPLETION"**: ❌ **FALSE CLAIMS** - All menus currently BROKEN
+## 📚 REFERENCE MATERIALS
 
-## 🚨 NEW VERIFICATION REQUIREMENTS
-Going forward, ALL task completion requires:
-1. **godot-tester agent usage** - No exceptions
-2. **Screenshot evidence** - Before, during, after states
-3. **Actual user testing** - ESC keys, button clicks, scene loading
-4. **Error-free console output** - No exceptions to functionality
-5. **Performance verification** - No frame drops or lag
+### Scene 4 Overview (from planning doc):
+1. **Part 1: The Ghosting** - Brother leaves, judgment vs empathy choice
+2. **Part 2: One-Handed Burden** - Unpacking with clingy baby mechanics  
+3. **Part 3: Salad of Solitude** - Narrative eating scene
+4. **Part 4: Conditional Sanctuary** - Bedtime minigame (peaceful vs stressful)
+5. **Part 5: Dream Framework** - Meter-influenced dream with morning reflection
 
-**ABSOLUTELY NO COMPLETION CLAIMS WITHOUT VISUAL PROOF**
+### Key Mechanics to Implement:
+- **Hold Baby Status**: Limits interactions to one-handed actions
+- **Fuss Meter**: Timer for how long baby can be put down
+- **Two-Handed Actions**: Require putting baby down temporarily
+- **Conditional Outcomes**: Bedtime difficulty based on earlier "Rage Leak"
+- **Dream Modifiers**: Visual/audio changes based on final meter values
 
-## 📸 Required Screenshot Types
-For each menu fix:
-- **Baseline**: Current broken state
-- **During**: Fix in progress
-- **Verification**: Working functionality
-- **Integration**: Navigation between menus
-- **Final**: Complete user workflow
+### Meter System Requirements:
+- **Rage Meter**: Tracks anger buildup, triggers "Rage Leak" events
+- **Overwhelm Meter**: Cognitive load from environment/tasks
+- **Reservoir Meter**: Accumulated emotional weight/suppression
+- **UI Display**: Visual representation of all three meters
+- **Save/Load**: Meter states persist between scenes
+- **Events**: Meter changes trigger gameplay consequences
 
-## 🏆 RECOVERY SUCCESS CRITERIA
-Recovery complete ONLY when:
-1. Main menu loads without errors (screenshot)
-2. Pause menu responds to ESC/P (screenshot)  
-3. Settings menu fully interactive (screenshot)
-4. Navigation flows work completely (screenshot)
-5. All changes tested by godot-tester agent
-6. Zero console errors during any menu operation
+## 🏗️ ARCHITECTURE NOTES
+- Use Godot's singleton pattern for meter system (autoload)
+- Component-based baby interaction (can be attached to different objects)
+- Scene-based approach for each part of Day 1 Scene 4
+- Signal-driven communication between systems
+- Resource files (.tres) for meter configurations and thresholds
+
+## 🧪 TESTING APPROACH
+- F9 MenuVerifier system is working for menu testing
+- Will need new testing tools for gameplay mechanics
+- Screenshot verification for meter UI states
+- Manual testing with specific meter value scenarios
+- Automated testing for baby interaction timers
+
+**INFRASTRUCTURE COMPLETE - READY TO BUILD REAL GAME!**

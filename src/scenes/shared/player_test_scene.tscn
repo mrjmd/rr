@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://ceyvs4ei67ucr"]
+[gd_scene load_steps=5 format=3 uid="uid://ceyvs4ei67ucr"]
 
 [ext_resource type="PackedScene" uid="uid://dlj66r4cxomf0" path="res://src/scenes/entities/player/player.tscn" id="1_ppuhf"]
 [ext_resource type="PackedScene" uid="uid://b3xy8vnq2m1p5" path="res://src/scenes/ui/hud/game_hud.tscn" id="2_ame1y"]
+[ext_resource type="PackedScene" uid="uid://6wcgeyxotnvj" path="res://src/scenes/ui/menus/pause_menu.tscn" id="3_pause"]
+[ext_resource type="Script" path="res://src/scripts/testing/menu_verifier.gd" id="4_verifier"]
 
 [node name="PlayerTestScene" type="Node2D"]
 
@@ -11,3 +13,8 @@ position = Vector2(400, 300)
 [node name="GameHUD" parent="." instance=ExtResource("2_ame1y")]
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PauseMenu" parent="." instance=ExtResource("3_pause")]
+
+[node name="MenuVerifier" type="Node" parent="."]
+script = ExtResource("4_verifier")

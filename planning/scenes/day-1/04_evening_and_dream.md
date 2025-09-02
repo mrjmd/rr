@@ -5,8 +5,13 @@ This scene follows immediately after the arrival and initial greetings.
 ### Part 1: The Ghosting
 - **Action:** Immediately after the awkward silence is broken, the Brother stands up and announces he has to leave.
 - **Dialogue (Brother):** "Well, I've got some things I gotta take care of."
-- **Internal Monologue:** *Just like that, he's gone. No questions. No offer to help. Just... gone.*
-- **Outcome:** This establishes the Brother's avoidance pattern immediately. Rando is left to handle the logistics of unpacking and childcare alone with his parents.
+- **Internal Monologue (Default Path):** The default reaction is one of pure judgment.
+    - *Just like that, he's gone. No questions. No offer to help. Just... gone.*
+- **Insight Pathway (Conditional):** This pathway is only unlocked if the player has made a specific "Connect" choice earlier in the day (e.g., the vulnerable response to the father's text in the car).
+    - **Mechanic:** If the pathway is unlocked, the default monologue appears, but is then interrupted by a "Moment of Clarity" UI prompt (e.g., a screen flicker, a subtle sound, a `[Hold to Reflect]` button that appears for only a few seconds).
+    - **Unlocked Monologue (If player catches the prompt):**
+        - *He just runs. No offer to help...* (A beat) *...I get it. I've got my gym. He's got... whatever he runs to. We just use different exits.*
+- **Outcome:** This establishes the Brother's avoidance pattern. By default, Rando judges it. If the player has earned it, Rando can have a painful moment of seeing himself in his brother's actions, turning judgment into empathy. Rando is still left to handle the logistics alone.
 
 ### Part 2: The One-Handed Burden (The Unpacking)
 - **Setting:** Rando must now set up his daughter's guest room and his own. Both are filled with clutter.

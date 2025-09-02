@@ -27,7 +27,7 @@ var game_tree: SceneTree
 var menu_scene_paths: Dictionary = {
 	"main_menu": "res://src/scenes/ui/menus/main_menu_simple.tscn",
 	"pause_menu": "res://src/scenes/ui/menus/pause_menu.tscn", 
-	"settings_menu": "res://src/scenes/ui/menus/settings_menu_standalone.tscn"
+	"settings_menu": "res://src/scenes/ui/menus/settings_menu.tscn"
 }
 
 func _ready() -> void:
@@ -118,6 +118,9 @@ func unregister_menu(menu_name: String) -> void:
 
 func open_menu(menu_name: String, use_transition: bool = true) -> void:
 	"""Open a menu with optional transition"""
+	if OS.is_debug_build():
+		print("MenuManager: open_menu() called - menu: ", menu_name, " use_transition: ", use_transition)
+	
 	if is_transitioning:
 		if OS.is_debug_build():
 			print("MenuManager: Ignoring open_menu - transition in progress")
@@ -286,15 +289,34 @@ func _switch_to_menu(menu_name: String, previous_menu: String) -> void:
 	# Close previous menu if it exists
 	if not previous_menu.is_empty():
 		var prev_instance = menu_instances.get(previous_menu)
-		if prev_instance and prev_instance.has_method("close_menu"):
-			prev_instance.close_menu(false)  # No animation during transition
+		if prev_instance:
+			if prev_instance.has_method("close_menu"):
+				prev_instance.close_menu(false)  # No animation during transition
+			elif prev_instance is CanvasLayer:
+				prev_instance.visible = false
+			
+			if OS.is_debug_build():
+				print("MenuManager: Closed previous menu: ", previous_menu)
 	
 	# Open new menu
 	var menu_instance = menu_instances.get(menu_name)
-	if menu_instance and menu_instance.has_method("open_menu"):
-		menu_instance.open_menu(false)  # No animation during transition
-	elif menu_instance is CanvasLayer:
-		menu_instance.visible = true
+	if menu_instance:
+		# Force the menu to be visible and properly opened
+		if menu_instance.has_method("open_menu"):
+			# For BaseMenu-derived classes, use force_open_menu to bypass state checks
+			if menu_instance.has_method("force_open_menu"):
+				# This is a BaseMenu-derived class, use force open
+				menu_instance.force_open_menu(false)  # No animation during transition
+			else:
+				menu_instance.open_menu(false)  # No animation during transition
+		elif menu_instance is CanvasLayer:
+			menu_instance.visible = true
+			# Ensure it's on the correct layer
+			if menu_instance.has_method("bring_to_front"):
+				menu_instance.bring_to_front()
+		
+		if OS.is_debug_build():
+			print("MenuManager: Opened new menu: ", menu_name, " visible: ", menu_instance.visible, " state: ", menu_instance.current_state if menu_instance.has_method("get_menu_debug_info") else "N/A")
 	
 	# Update stack and current menu
 	if not previous_menu.is_empty() and previous_menu != menu_name:
@@ -306,7 +328,7 @@ func _switch_to_menu(menu_name: String, previous_menu: String) -> void:
 	
 	current_menu = menu_name
 	
-	# Update layers
+	# Update layers to ensure proper ordering
 	_update_menu_layers()
 	
 	# Emit signal
@@ -344,7 +366,11 @@ func _update_menu_layers() -> void:
 		var menu_instance = menu_instances.get(menu_name)
 		
 		if menu_instance is CanvasLayer:
-			menu_instance.layer = MENU_LAYER_BASE + (i * MENU_LAYER_INCREMENT)
+			var layer_value = MENU_LAYER_BASE + (i * MENU_LAYER_INCREMENT)
+			menu_instance.layer = layer_value
+			
+			if OS.is_debug_build():
+				print("MenuManager: Set layer ", layer_value, " for menu: ", menu_name)
 
 func _connect_menu_signals(menu_name: String, menu_node: Node) -> void:
 	"""Connect signals from a menu instance"""

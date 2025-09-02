@@ -1,40 +1,38 @@
-extends SceneTree
-## Automated screenshot capture script for Godot
-## Captures ONLY the game viewport, not the entire desktop
+extends Node
+## Script to capture game screenshots for testing
 
-func _init() -> void:
+func _ready():
 	print("[Screenshot] Waiting for scene to load...")
-	# Wait for first frame
-	await process_frame
-	await create_timer(0.5).timeout
+	# Wait a frame for everything to be ready
+	await get_tree().process_frame
+	await get_tree().process_frame
 	
-	print("[Screenshot] Taking viewport screenshot...")
-	# Get the main viewport
-	var viewport = get_root()
+	# Wait a bit more for UI to render
+	await get_tree().create_timer(0.5).timeout
+	
+	print("[Screenshot] Capturing screenshot...")
+	capture_screenshot("main_menu_diagnostic")
+	
+	# Exit after capture
+	get_tree().quit()
+
+func capture_screenshot(filename: String):
+	var viewport = get_viewport()
+	if not viewport:
+		print("ERROR: Could not get viewport")
+		return
+	
+	# Get the rendered image
 	var image = viewport.get_texture().get_image()
+	if not image:
+		print("ERROR: Could not get image from viewport")
+		return
 	
-	# Save with timestamp
-	var timestamp = Time.get_unix_time_from_system()
-	var filename = "res://testing/screenshots/current/godot_capture_%d.png" % timestamp
-	image.save_png(filename)
+	# Save to testing directory
+	var save_path = "testing/screenshots/current/" + filename + ".png"
+	var result = image.save_png(save_path)
 	
-	print("[Screenshot] Saved to: " + filename)
-	print("[Screenshot] Image size: %s" % image.get_size())
-	
-	# Also save a "latest" version for easy access
-	var latest_filename = "res://testing/screenshots/current/LATEST_CAPTURE.png"
-	image.save_png(latest_filename)
-	print("[Screenshot] Also saved as: " + latest_filename)
-	
-	# Test if dialogue is visible by checking pixels
-	var center = image.get_size() / 2
-	var bottom_center = Vector2i(center.x, image.get_height() - 150)
-	var pixel_color = image.get_pixelv(bottom_center)
-	
-	print("[Screenshot] Bottom center pixel color: %s" % pixel_color)
-	if pixel_color.a > 0.1:
-		print("[Screenshot] Something visible at dialogue position!")
+	if result == OK:
+		print("Screenshot saved: " + save_path)
 	else:
-		print("[Screenshot] WARNING: Nothing visible at expected dialogue position!")
-	
-	quit()
+		print("ERROR: Failed to save screenshot: " + str(result))

@@ -12,7 +12,15 @@ The gameplay is built on a recurring cycle that represents the protagonist's int
 
 3.  **Consequence:** The player's choices in managing their internal state have both immediate social outcomes and long-term psychological consequences, which are primarily reflected in the nightly **Dream Sequences**.
 
-## 2. Modes of Emotional Management
+## 2. The Arc of Insight: A Counter-Intuitive Journey
+
+A core principle of the game is the subversion of a typical character arc. Rando's psychological journey is not one of steady improvement, but one of diminishing capacity.
+
+- **Highest Capacity at the Start:** Rando enters the game with the most emotional and mental "spaciousness." He is not yet fully overwhelmed by the family system. Therefore, his ability to access moments of clarity, empathy, and self-reflection is at its peak during the early parts of the game (primarily Day 1).
+- **Systematic Degradation:** As the week progresses, the cumulative effect of the **Reservoir** and **Overwhelm** meters will wear him down. This is represented mechanically by the **Clarity Meter**.
+- **Narrative Irony:** This creates a tragic irony. Just as the player is accumulating more experiences to reflect upon, their capacity to do so is shrinking. The window for healing is, in many ways, closing with each passing day, creating a sense of urgency and heightening the stakes of the early-game choices.
+
+## 3. Modes of Emotional Management
 
 Every major interaction is a choice between different strategies, each with a unique cost and benefit.
 
@@ -20,36 +28,46 @@ Every major interaction is a choice between different strategies, each with a un
 
 - **Active Suppression (The Emergency Valve):** This is a conscious, high-stakes decision to bottle up an overwhelming emotional surge. It is a timed mechanic that appears only when a meter like **Rage** is critically high. It prevents immediate social damage at the cost of significantly filling the **Reservoir Meter**.
 
-- **Passive Avoidance (The Leaky Faucet):** This is the habitual, often unconscious, act of steering a conversation away from emotional topics. This is handled through dialogue choices that deflect, intellectualize, or give non-committal answers. This path seems safe, but it increases the **Overwhelm Meter**, representing the growing cognitive load of maintaining the avoidance and pushing the player closer to dissociation.
+- **Passive Avoidance (The Leaky Faucet):** This is the habitual, often unconscious, act of steering a conversation away from emotional topics. This is handled through dialogue choices that deflect, intellectualize, or give non-committal answers. This path seems safe, but it increases the **Overwhelm Meter**.
 
 - **Rage Leak (The Failure State):** If the **Rage Meter** fills completely without being suppressed, the emotion bursts out as an involuntary sarcastic comment or sharp action, causing immediate social damage.
 
-## 3. The Four Core Meters
+## 4. The Core Meters & The Clarity Meter
 
-These four meters represent the player's internal state and progress.
+These meters represent the player's internal state and progress.
 
-### a. The Rage Meter
-- **Purpose:** Tracks immediate, in-the-moment frustration and anger.
-- **Fills From:** Failed mini-games, frustrating interactions, triggering dialogue.
-- **Management:** Can be drained by **Active Suppression**.
+### a. The Four Active Meters
 
-### b. The Reservoir Meter
-- **Purpose:** Tracks the long-term, cumulative cost of bottling up emotions. It represents the weight of everything unsaid.
-- **Fills From:** Primarily from acts of **Active Suppression**.
-- **Consequence:** The higher the Reservoir, the more surreal and fragmented the nightly **Dream Sequences** become. It may also make it harder to choose **Connect** options over time.
-- **Management:** Cannot be easily drained. May only be lowered through significant breakthroughs via the **Connection Meter**.
+-   **The Rage Meter**
+    -   **Purpose:** Tracks immediate, in-the-moment frustration and anger.
+    -   **Fills From:** Failed mini-games, frustrating interactions, triggering dialogue.
+    -   **Management:** Can be drained by **Active Suppression**.
 
-### c. The Overwhelm Meter
-- **Purpose:** Tracks sensory and cognitive load from the environment and internal anxieties.
-- **Fills From:** Physical clutter, excessive noise, the "Mental Load" of the **Responsibility Cascade**, and the cognitive dissonance from acts of **Passive Avoidance**.
-- **Consequence:** This meter directly causes the **Dissociation** state.
+-   **The Reservoir Meter**
+    -   **Purpose:** Tracks the long-term, cumulative cost of bottling up emotions. It represents the weight of everything unsaid.
+    -   **Fills From:** Primarily from acts of **Active Suppression**.
+    -   **Consequence:** The higher the Reservoir, the more surreal and fragmented the nightly **Dream Sequences** become. It may also make it harder to choose **Connect** options over time.
+    -   **Management:** Cannot be easily drained. May only be lowered through significant breakthroughs via the **Connection Meter**.
 
-### d. The Connection Meter
-- **Purpose:** Tracks positive progress, moments of genuine vulnerability and healing.
-- **Fills From:** Successfully choosing to **Connect**. Witnessing "Islands of Peace" (moments of genuine warmth between other family members).
-- **Consequence:** Filling this meter is the game's primary "win" condition. It can unlock warmer dreams, create lasting positive changes in family dynamics, and slowly lower the **Reservoir**.
+-   **The Overwhelm Meter**
+    -   **Purpose:** Tracks sensory and cognitive load from the environment and internal anxieties.
+    -   **Fills From:** Physical clutter, excessive noise, the "Mental Load" of the **Responsibility Cascade**, and the cognitive dissonance from acts of **Passive Avoidance**.
+    -   **Consequence:** This meter directly causes the **Dissociation** state.
 
-## 4. Key Systems & Mechanics
+-   **The Connection Meter**
+    -   **Purpose:** Tracks positive progress, moments of genuine vulnerability and healing.
+    -   **Fills From:** Successfully choosing to **Connect**. Witnessing "Islands of Peace" (moments of genuine warmth between other family members).
+    -   **Consequence:** Filling this meter is the game's primary "win" condition. It can unlock warmer dreams, create lasting positive changes in family dynamics, and slowly lower the **Reservoir**.
+
+### b. The Clarity Meter (The Passive Meter)
+This is a central UI element that provides a visual metaphor for Rando's mental and emotional state. It is the resource that powers his ability to access self-aware insights.
+- **Visuals:** A spherical orb of light. It begins the game full and bright.
+- **Function:** It is a passive meter that degrades over time based on the state of the other meters. It represents Rando's diminishing capacity for self-reflection as the week wears on.
+- **Interaction with Reservoir:** When the player chooses to **Suppress Rage**, the dark water of the **Reservoir Meter** visually flows into or over the Clarity orb, partially submerging the light and dimming it. The higher the Reservoir, the more submerged and inaccessible the light becomes.
+- **Interaction with Overwhelm:** As the **Overwhelm Meter** increases, the water filling the orb becomes murky, hazy, and opaque, further obscuring the light.
+- **Connection to Insight:** The brightness and clarity of the orb directly determine the frequency and duration of the "Moment of Clarity" prompts. A dim, murky orb means fewer and shorter opportunities for earned insight.
+
+## 5. Key Systems & Mechanics
 
 ### a. Dissociation (Caused by Overwhelm)
 Dissociation is not a meter, but a *state* triggered by the **Overwhelm Meter**.
@@ -69,7 +87,7 @@ A pervasive system where the player is constantly aware of the chain of conseque
 ### d. The Avoidance Dilemma: Conflicting Values
 This system introduces a core conflict between the protagonist's personal value of directness and the family's stated desire for avoidance.
 - **The Setup:** The player is informed early on that specific family members (e.g., the siblings) have requested not to be engaged in heavy, emotional conversations.
-- **The Conflict:** When a dialogue choice appears that would lead to a direct, "Connect"-style conversation, the player is caught in a dilemma. The internal monologue will highlight this conflict: *"They asked you not to. Is respecting their boundary the right thing to do, or is it a betrayal of my own integrity? Am I just using their request as an excuse to be avoidant myself?"*
+- **The Conflict:** When a dialogue choice appears that would lead to a direct, "Connect"-style conversation, the player is caught in a dilemma. The internal monologue will highlight this conflict: *'''They asked you not to. Is respecting their boundary the right thing to do, or is it a betrayal of my own integrity? Am I just using their request as an excuse to be avoidant myself?'''*
 - **The Consequence:** Choosing the "respectful" path of avoidance in these specific situations comes at a high price. It causes a large, immediate spike in the **Overwhelm Meter**. This models the intense internal dissonance of acting against one's own values, even for a seemingly noble reason. It is a direct path to dissociation.
 
 ### e. Dream Sequences
@@ -90,7 +108,7 @@ This system represents the constant, intrusive pressure of the protagonist's rem
     - Successfully completing a task might offer a brief, temporary reduction in the Overwhelm fill rate.
     - Most importantly, work becomes a new avoidance tool. A dialogue option like `[Look at phone] "Sorry, I have to take this..."` allows Rando to escape a conversation. This is a **DEFLECTOR** pattern that avoids the immediate conflict but fills the **Reservoir Meter**.
 
-## 5. Future Development & Evolution
+## 6. Future Development & Evolution
 
 This section captures brainstorming and feedback for future mechanical and narrative development.
 

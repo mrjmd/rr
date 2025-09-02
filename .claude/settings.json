@@ -71,6 +71,16 @@
             "timeout": 5
           }
         ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/screenshot_verification_hook.sh screenshot_created",
+            "timeout": 3
+          }
+        ]
       }
     ],
     "SessionStart": [

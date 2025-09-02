@@ -348,28 +348,33 @@ func _on_focus_exited() -> void:
 
 func _play_selection_sound() -> void:
 	"""Play sound when button is selected"""
-	if AudioManager:
-		AudioManager.play_ui_sound("ui_click")
+	var audio_manager = get_node_or_null("/root/AudioManager")
+	if audio_manager:
+		audio_manager.play_ui_sound("ui_click")
 
 func _play_hover_sound() -> void:
 	"""Play sound when button is hovered"""
-	if AudioManager:
-		AudioManager.play_ui_sound("ui_hover")
+	var audio_manager = get_node_or_null("/root/AudioManager")
+	if audio_manager:
+		audio_manager.play_ui_sound("ui_hover")
 
 func _play_back_sound() -> void:
 	"""Play sound for back/cancel actions"""
-	if AudioManager:
-		AudioManager.play_ui_sound("ui_back")
+	var audio_manager = get_node_or_null("/root/AudioManager")
+	if audio_manager:
+		audio_manager.play_ui_sound("ui_back")
 
 func _play_confirm_sound() -> void:
 	"""Play sound for confirm actions"""
-	if AudioManager:
-		AudioManager.play_ui_sound("ui_confirm")
+	var audio_manager = get_node_or_null("/root/AudioManager")
+	if audio_manager:
+		audio_manager.play_ui_sound("ui_confirm")
 
 func _play_error_sound() -> void:
 	"""Play sound for error actions"""
-	if AudioManager:
-		AudioManager.play_ui_sound("ui_error")
+	var audio_manager = get_node_or_null("/root/AudioManager")
+	if audio_manager:
+		audio_manager.play_ui_sound("ui_error")
 
 # Utility Methods
 

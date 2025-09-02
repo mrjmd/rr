@@ -51,7 +51,7 @@ var _returning_to_menu: String = ""  # Track which menu to return to
 func _ready() -> void:
 	# Set menu name and layer (above other menus)
 	menu_name = "settings_menu"
-	layer = 225  # Above menu layer but below pause
+	layer = 300  # Above pause menu (which is at 250)
 	
 	# Set menu container and background for BaseMenu
 	menu_container = $MenuContainer
@@ -496,17 +496,19 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Call parent input handling
 	super._unhandled_input(event)
 	
-	# Handle tab switching with number keys
+	# Handle tab switching with number keys (using existing actions)
 	if tab_container:
-		if event.is_action_pressed("ui_1") or event.is_action_pressed("ui_text_backspace"):
-			tab_container.current_tab = 0  # Audio tab
-			get_viewport().set_input_as_handled()
-		elif event.is_action_pressed("ui_2"):
-			tab_container.current_tab = 1  # Video tab
-			get_viewport().set_input_as_handled()
-		elif event.is_action_pressed("ui_3"):
-			tab_container.current_tab = 2  # Controls tab
-			get_viewport().set_input_as_handled()
+		if event is InputEventKey and event.pressed:
+			match event.keycode:
+				KEY_1:
+					tab_container.current_tab = 0  # Audio tab
+					get_viewport().set_input_as_handled()
+				KEY_2:
+					tab_container.current_tab = 1  # Video tab
+					get_viewport().set_input_as_handled()
+				KEY_3:
+					tab_container.current_tab = 2  # Controls tab
+					get_viewport().set_input_as_handled()
 
 # Debug Methods
 

@@ -82,10 +82,28 @@ func _connect_menu_signals() -> void:
 func open_menu(animate: bool = true) -> void:
 	"""Open the menu with optional animation"""
 	if current_state != MenuState.CLOSED:
+		if OS.is_debug_build():
+			print("BaseMenu: Cannot open menu ", menu_name, " - current state: ", MenuState.keys()[current_state])
 		return
 	
+	_open_menu_internal(animate)
+
+func force_open_menu(animate: bool = true) -> void:
+	"""Force open the menu regardless of current state - for MenuManager use"""
+	if OS.is_debug_build():
+		print("BaseMenu: Force opening menu ", menu_name, " - current state: ", MenuState.keys()[current_state])
+	
+	# Reset state first
+	current_state = MenuState.CLOSED
+	_open_menu_internal(animate)
+
+func _open_menu_internal(animate: bool) -> void:
+	"""Internal method to handle menu opening logic"""
 	current_state = MenuState.OPENING
 	visible = true
+	
+	if OS.is_debug_build():
+		print("BaseMenu: Opening menu ", menu_name, " - animate: ", animate, " visible: ", visible)
 	
 	# Store previous focus for restoration
 	_store_previous_focus()

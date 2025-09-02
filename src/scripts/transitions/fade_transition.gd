@@ -79,6 +79,7 @@ func fade_in() -> void:
 	
 	# Create new tween and animate
 	_tween = get_tree().create_tween()
+	_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)  # Process when paused
 	_tween.set_ease(Tween.EASE_IN_OUT)
 	_tween.set_trans(Tween.TRANS_CUBIC)
 	_tween.tween_property(color_rect, "modulate:a", 1.0, fade_duration)
@@ -110,6 +111,7 @@ func fade_out() -> void:
 	
 	# Create new tween and animate
 	_tween = get_tree().create_tween()
+	_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)  # Process when paused
 	_tween.set_ease(Tween.EASE_IN_OUT)
 	_tween.set_trans(Tween.TRANS_CUBIC)
 	_tween.tween_property(color_rect, "modulate:a", 0.0, fade_duration)

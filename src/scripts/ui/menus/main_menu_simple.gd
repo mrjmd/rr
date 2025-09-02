@@ -19,12 +19,15 @@ func _ready() -> void:
 	# Set proper layer for menus
 	layer = 200
 	
-	# Register with MenuManager
-	if MenuManager:
-		MenuManager.register_menu("main_menu", self)
+	# Register with MenuManager if available
+	var menu_manager = get_node_or_null("/root/MenuManager")
+	if menu_manager:
+		menu_manager.register_menu("main_menu", self)
 	
-	# Initially hidden - will be shown via MenuManager
-	visible = false
+	# Handle visibility - if loaded directly (standalone), show immediately
+	# If loaded via MenuManager, stay hidden until explicitly shown
+	var is_standalone = not get_node_or_null("/root/MenuManager") or get_tree().current_scene == self
+	visible = is_standalone
 	
 	# Configure title and subtitle
 	_setup_title_elements()
@@ -170,8 +173,9 @@ func _on_start_button_pressed() -> void:
 func _on_settings_button_pressed() -> void:
 	print("Settings button pressed!")
 	# Open settings menu via MenuManager
-	if MenuManager:
-		MenuManager.open_menu("settings_menu", true)
+	var menu_manager = get_node_or_null("/root/MenuManager")
+	if menu_manager:
+		menu_manager.open_menu("settings_menu", true)
 	else:
 		print("WARNING: MenuManager not available - cannot open settings")
 

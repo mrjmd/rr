@@ -19,13 +19,14 @@ var is_menu_open: bool = false
 var was_paused_before: bool = false
 
 func _ready() -> void:
-	# Set layer and process mode
+	# Set layer and process mode 
 	layer = 250
-	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	process_mode = Node.PROCESS_MODE_ALWAYS  # Must be ALWAYS to receive pause input when game is running
 	
 	# Register with MenuManager
-	if MenuManager:
-		MenuManager.register_menu("pause_menu", self)
+	var menu_manager = get_node_or_null("/root/MenuManager")
+	if menu_manager:
+		menu_manager.register_menu("pause_menu", self)
 	
 	# Initially hidden
 	visible = false
@@ -73,8 +74,8 @@ func _connect_buttons() -> void:
 	if main_menu_button:
 		main_menu_button.pressed.connect(_on_main_menu_pressed)
 
-func _unhandled_input(event: InputEvent) -> void:
-	"""Handle input"""
+func _input(event: InputEvent) -> void:
+	"""Handle input with high priority"""
 	if event.is_action_pressed("pause_menu"):
 		toggle_menu()
 		get_viewport().set_input_as_handled()
@@ -141,8 +142,9 @@ func _on_resume_pressed() -> void:
 
 func _on_settings_pressed() -> void:
 	"""Handle settings button"""
-	if MenuManager:
-		MenuManager.open_menu("settings_menu", true)
+	var menu_manager = get_node_or_null("/root/MenuManager")
+	if menu_manager:
+		menu_manager.open_menu("settings_menu", true)
 	else:
 		print("WARNING: MenuManager not available - cannot open settings")
 
