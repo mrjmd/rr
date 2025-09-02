@@ -1,5 +1,5 @@
 # Rando's Reservoir - Current Session TODOs
-*Last Updated: 2025-09-02 14:30*
+*Last Updated: 2025-09-02 14:35*
 *Session Started: 2025-09-02 14:30*
 *Project Phase: Prototype - CRITICAL RECOVERY MODE*
 
@@ -10,6 +10,47 @@
 
 ## 🚀 Current Sprint Goal
 **EMERGENCY RECOVERY**: Fix all broken menu systems with MANDATORY visual verification using godot-tester agent. NO CLAIMS without screenshot proof.
+
+## 🚨 HANDOFF DOCUMENTATION FOR NEXT AGENT
+
+### CRITICAL BROKEN STATE
+The menu systems are COMPLETELY BROKEN after attempted fixes that were never tested:
+1. Main Menu (main_menu_simple.tscn) - Won't load properly  
+2. Pause Menu - ESC/P keys don't work at all
+3. Settings Menu - Untested, likely broken
+4. Navigation System - Untested, may have conflicts
+
+### WHAT WENT WRONG
+- Previous agent claimed fixes without visual verification
+- Made changes that broke previously working systems  
+- Did not use godot-tester agent as required
+- Zero screenshots provided as proof
+- Claimed completion of Week 5-6 menus when they're actually broken
+
+### MANDATORY REQUIREMENTS GOING FORWARD
+1. Use godot-tester agent for ALL menu work
+2. Capture screenshots at every step (before/during/after)
+3. Test actual functionality:
+   - Button clicks actually work
+   - ESC key navigation functions
+   - Scene transitions complete
+   - No console errors present
+4. NEVER claim completion without visual proof
+
+### FILES TO CHECK
+- src/scripts/ui/menus/main_menu_simple.gd - Recent changes broke loading
+- src/scripts/ui/menus/pause_menu_simple.gd - Input handling broken
+- globals/menu_manager.gd - May have integration issues
+- project.godot - Input actions may be misconfigured
+
+### RECOVERY STEPS
+1. First run each menu scene and capture error screenshots
+2. Check console output for specific errors
+3. Review recent git commits for breaking changes
+4. Test with godot-tester agent before any claims
+5. Provide screenshot proof of each fix
+
+This documentation ensures the next agent understands the critical state and requirements.
 
 ## 🔄 IN PROGRESS (Max 1 item)
 *No tasks currently in progress - awaiting proper agent-based diagnosis*
