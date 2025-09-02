@@ -25,8 +25,8 @@ var game_tree: SceneTree
 
 # Menu scene paths - populated during initialization
 var menu_scene_paths: Dictionary = {
-	"main_menu": "res://src/scenes/ui/menus/main_menu.tscn",
-	"pause_menu": "res://src/scenes/ui/menus/pause_menu.tscn",
+	"main_menu": "res://src/scenes/ui/menus/main_menu_simple.tscn",
+	"pause_menu": "res://src/scenes/ui/menus/pause_menu.tscn", 
 	"settings_menu": "res://src/scenes/ui/menus/settings_menu_standalone.tscn"
 }
 

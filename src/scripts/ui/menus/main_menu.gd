@@ -110,7 +110,7 @@ func _setup_background_styling() -> void:
 	"""Configure background and panel styling"""
 	# Background rect styling
 	if background_rect:
-		background_rect.color = background_color
+		background_rect.color = Color(0.1, 0.1, 0.15, 0.95)  # Dark background
 		background_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
 	# Main panel styling

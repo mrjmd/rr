@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8k5m9n2p6r4s"]
+[gd_scene load_steps=3 format=3 uid="uid://c8k5nan2p6r4s"]
 
-[ext_resource type="Script" path="res://src/scripts/ui/menus/main_menu_simple.gd" id="1_main_menu_simple"]
-[ext_resource type="Script" path="res://src/scripts/ui/menus/menu_button.gd" id="2_menu_button"]
+[ext_resource type="Script" uid="uid://ct050ud7cpxcl" path="res://src/scripts/ui/menus/main_menu_simple.gd" id="1_main_menu_simple"]
+[ext_resource type="Script" uid="uid://bx8b0am7xiakr" path="res://src/scripts/ui/menus/menu_button.gd" id="2_menu_button"]
 
 [node name="MainMenuSimple" type="CanvasLayer"]
 layer = 200
@@ -12,6 +12,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
 [node name="BackgroundRect" type="ColorRect" parent="MenuContainer"]
@@ -19,8 +21,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.1, 0.1, 0.15, 0.95)
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+color = Color(0.1, 0.1, 0.15, 0.95)
 
 [node name="MainPanel" type="Panel" parent="MenuContainer"]
 layout_mode = 1
@@ -33,6 +37,8 @@ offset_left = -300.0
 offset_top = -250.0
 offset_right = 300.0
 offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/MainPanel"]
 layout_mode = 1
@@ -43,6 +49,8 @@ offset_left = 40.0
 offset_top = 30.0
 offset_right = -40.0
 offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TitleContainer" type="VBoxContainer" parent="MenuContainer/MainPanel/VBoxContainer"]
 layout_mode = 2
@@ -63,9 +71,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Spacer1" type="Control" parent="MenuContainer/MainPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 3
-custom_minimum_size = Vector2(0, 40)
 
 [node name="ButtonContainer" type="VBoxContainer" parent="MenuContainer/MainPanel/VBoxContainer"]
 layout_mode = 2
@@ -80,8 +88,8 @@ text = "Start Game"
 script = ExtResource("2_menu_button")
 
 [node name="Spacer2" type="Control" parent="MenuContainer/MainPanel/VBoxContainer/ButtonContainer"]
-layout_mode = 2
 custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
 
 [node name="SettingsButton" type="Button" parent="MenuContainer/MainPanel/VBoxContainer/ButtonContainer"]
 custom_minimum_size = Vector2(200, 50)
@@ -91,8 +99,8 @@ text = "Settings"
 script = ExtResource("2_menu_button")
 
 [node name="Spacer3" type="Control" parent="MenuContainer/MainPanel/VBoxContainer/ButtonContainer"]
-layout_mode = 2
 custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
 
 [node name="QuitButton" type="Button" parent="MenuContainer/MainPanel/VBoxContainer/ButtonContainer"]
 custom_minimum_size = Vector2(200, 50)
@@ -102,6 +110,6 @@ text = "Quit Game"
 script = ExtResource("2_menu_button")
 
 [node name="Spacer4" type="Control" parent="MenuContainer/MainPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_vertical = 3
-custom_minimum_size = Vector2(0, 20)

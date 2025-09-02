@@ -19,6 +19,13 @@ func _ready() -> void:
 	# Set proper layer for menus
 	layer = 200
 	
+	# Register with MenuManager
+	if MenuManager:
+		MenuManager.register_menu("main_menu", self)
+	
+	# Initially hidden - will be shown via MenuManager
+	visible = false
+	
 	# Configure title and subtitle
 	_setup_title_elements()
 	
@@ -162,7 +169,33 @@ func _on_start_button_pressed() -> void:
 
 func _on_settings_button_pressed() -> void:
 	print("Settings button pressed!")
+	# Open settings menu via MenuManager
+	if MenuManager:
+		MenuManager.open_menu("settings_menu", true)
+	else:
+		print("WARNING: MenuManager not available - cannot open settings")
 
 func _on_quit_button_pressed() -> void:
 	print("Quit Game button pressed!")
 	get_tree().quit()
+
+# MenuManager-compatible methods
+func open_menu(animate: bool = true) -> void:
+	"""MenuManager-compatible open method"""
+	visible = true
+	if start_button:
+		start_button.grab_focus()
+	
+	if OS.is_debug_build():
+		print("MainMenuSimple: Menu opened")
+
+func close_menu(animate: bool = true) -> void:
+	"""MenuManager-compatible close method"""
+	visible = false
+	
+	if OS.is_debug_build():
+		print("MainMenuSimple: Menu closed")
+
+func is_open() -> bool:
+	"""Check if menu is open"""
+	return visible

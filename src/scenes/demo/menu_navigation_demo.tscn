@@ -1,30 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://dcnwp3ku4btcl"]
+[gd_scene load_steps=6 format=3 uid="uid://dcnwp3ku4btcl"]
 
-[ext_resource type="Script" path="res://src/scripts/demo/menu_navigation_demo.gd" id="1_2q8xf"]
-[ext_resource type="PackedScene" path="res://src/scenes/ui/menus/main_menu.tscn" id="2_3r4yg"]
-[ext_resource type="PackedScene" path="res://src/scenes/ui/menus/pause_menu.tscn" id="3_4s5hj"]
-[ext_resource type="PackedScene" path="res://src/scenes/ui/menus/settings_menu_standalone.tscn" id="4_5t6ik"]
-[ext_resource type="PackedScene" path="res://src/scenes/transitions/fade_transition.tscn" id="5_6u7jl"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1a2b3"]
-bg_color = Color(0.2, 0.3, 0.4, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2b3c4"]
-bg_color = Color(0.3, 0.4, 0.5, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+[ext_resource type="Script" uid="uid://bgomngk5o6gij" path="res://src/scripts/demo/menu_navigation_demo.gd" id="1_2q8xf"]
+[ext_resource type="PackedScene" uid="uid://bfj4k8map2q5r" path="res://src/scenes/ui/menus/main_menu.tscn" id="2_3r4yg"]
+[ext_resource type="PackedScene" uid="uid://c5j8lal2m3n4p" path="res://src/scenes/ui/menus/pause_menu.tscn" id="3_4s5hj"]
+[ext_resource type="PackedScene" uid="uid://baxy1aw1j2klm" path="res://src/scenes/ui/menus/settings_menu_standalone.tscn" id="4_5t6ik"]
+[ext_resource type="PackedScene" uid="uid://bylx8kxytvn3u" path="res://src/scenes/transitions/fade_transition.tscn" id="5_6u7jl"]
 
 [node name="MenuNavigationDemo" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_2q8xf")
 
 [node name="Background" type="ColorRect" parent="."]
@@ -32,8 +20,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.1, 0.15, 0.2, 1)
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+color = Color(0.1, 0.15, 0.2, 1)
 
 [node name="DemoUI" type="CanvasLayer" parent="."]
 layer = 100
@@ -51,7 +41,6 @@ offset_bottom = -20.0
 layout_mode = 2
 text = "Menu Navigation Demo"
 horizontal_alignment = 1
-add_theme_font_size_override/font_size = 20
 
 [node name="Separator1" type="HSeparator" parent="DemoUI/DemoControls"]
 layout_mode = 2
@@ -62,22 +51,18 @@ layout_mode = 2
 [node name="OpenMainMenuBtn" type="Button" parent="DemoUI/DemoControls/ButtonsContainer"]
 layout_mode = 2
 text = "Open Main Menu"
-add_theme_stylebox_override/normal = SubResource("StyleBoxFlat_1a2b3")
 
 [node name="OpenPauseMenuBtn" type="Button" parent="DemoUI/DemoControls/ButtonsContainer"]
 layout_mode = 2
 text = "Open Pause Menu"
-add_theme_stylebox_override/normal = SubResource("StyleBoxFlat_1a2b3")
 
 [node name="OpenSettingsBtn" type="Button" parent="DemoUI/DemoControls/ButtonsContainer"]
 layout_mode = 2
 text = "Open Settings Menu"
-add_theme_stylebox_override/normal = SubResource("StyleBoxFlat_1a2b3")
 
 [node name="CloseAllBtn" type="Button" parent="DemoUI/DemoControls/ButtonsContainer"]
 layout_mode = 2
 text = "Close All Menus"
-add_theme_stylebox_override/normal = SubResource("StyleBoxFlat_2b3c4")
 
 [node name="Separator2" type="HSeparator" parent="DemoUI/DemoControls"]
 layout_mode = 2
@@ -88,22 +73,18 @@ layout_mode = 2
 [node name="InfoLabel" type="Label" parent="DemoUI/DemoControls/InfoContainer"]
 layout_mode = 2
 text = "Menu Info:"
-add_theme_font_size_override/font_size = 14
 
 [node name="CurrentMenuLabel" type="Label" parent="DemoUI/DemoControls/InfoContainer"]
 layout_mode = 2
 text = "Current: None"
-add_theme_font_size_override/font_size = 12
 
 [node name="StackSizeLabel" type="Label" parent="DemoUI/DemoControls/InfoContainer"]
 layout_mode = 2
 text = "Stack Size: 0"
-add_theme_font_size_override/font_size = 12
 
 [node name="IsTransitioningLabel" type="Label" parent="DemoUI/DemoControls/InfoContainer"]
 layout_mode = 2
 text = "Transitioning: No"
-add_theme_font_size_override/font_size = 12
 
 [node name="Separator3" type="HSeparator" parent="DemoUI/DemoControls"]
 layout_mode = 2
@@ -113,7 +94,6 @@ layout_mode = 2
 text = "Use buttons to test navigation
 ESC: Go back one menu level
 Test the menu flow and transitions"
-add_theme_font_size_override/font_size = 10
 
 [node name="FadeTransition" parent="." instance=ExtResource("5_6u7jl")]
 

@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxyz1w2j3klm"]
+[gd_scene load_steps=3 format=3 uid="uid://cxy01w2j3klm"]
 
-[ext_resource type="PackedScene" path="res://src/scenes/ui/menus/settings_menu_standalone.tscn" id="1_standalone_demo"]
-[ext_resource type="Script" path="res://src/scripts/demo/settings_menu_standalone_demo.gd" id="2_standalone_demo"]
+[ext_resource type="PackedScene" uid="uid://baxy1aw1j2klm" path="res://src/scenes/ui/menus/settings_menu_standalone.tscn" id="1_standalone_demo"]
+[ext_resource type="Script" uid="uid://cs4bubqju5xlu" path="res://src/scripts/demo/settings_menu_standalone_demo.gd" id="2_standalone_demo"]
 
 [node name="SettingsMenuStandaloneDemo" type="Node"]
 script = ExtResource("2_standalone_demo")

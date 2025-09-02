@@ -23,6 +23,10 @@ func _ready() -> void:
 	layer = 250
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	
+	# Register with MenuManager
+	if MenuManager:
+		MenuManager.register_menu("pause_menu", self)
+	
 	# Initially hidden
 	visible = false
 	
@@ -137,8 +141,10 @@ func _on_resume_pressed() -> void:
 
 func _on_settings_pressed() -> void:
 	"""Handle settings button"""
-	if OS.is_debug_build():
-		print("Settings not implemented yet")
+	if MenuManager:
+		MenuManager.open_menu("settings_menu", true)
+	else:
+		print("WARNING: MenuManager not available - cannot open settings")
 
 func _on_main_menu_pressed() -> void:
 	"""Handle main menu button"""
@@ -150,3 +156,12 @@ func _on_main_menu_pressed() -> void:
 	else:
 		if OS.is_debug_build():
 			print("SceneManager not available - main menu navigation disabled")
+
+# MenuManager-compatible methods
+func open_menu(animate: bool = true) -> void:
+	"""MenuManager-compatible open method"""
+	show_menu()
+
+func close_menu(animate: bool = true) -> void:
+	"""MenuManager-compatible close method"""
+	hide_menu()
