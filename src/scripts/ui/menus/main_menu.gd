@@ -31,6 +31,10 @@ func _initialize_menu() -> void:
 	"""Initialize main menu specific setup"""
 	super._initialize_menu()
 	
+	# Register with MenuManager
+	if MenuManager:
+		MenuManager.register_menu("main_menu", self)
+	
 	# Configure title and subtitle
 	_setup_title_elements()
 	
@@ -176,14 +180,12 @@ func _handle_open_settings() -> void:
 	if OS.is_debug_build():
 		print("Opening settings menu...")
 	
-	# Navigate to settings menu (placeholder for now)
-	navigate_to_menu("settings_menu")
-	
-	# For now, just show a debug message
-	if has_node("/root/EventBus"):
-		var event_bus = get_node("/root/EventBus")
-		if event_bus.has_signal("debug_message"):
-			event_bus.debug_message.emit("Settings menu not yet implemented")
+	# Use MenuManager to open settings
+	if MenuManager:
+		MenuManager.open_menu("settings_menu", true)
+	else:
+		# Fallback to BaseMenu navigation
+		navigate_to_menu("settings_menu")
 
 func _handle_quit_game() -> void:
 	"""Handle quit game button press"""

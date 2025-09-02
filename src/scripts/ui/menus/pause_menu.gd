@@ -37,6 +37,10 @@ func _initialize_menu() -> void:
 	"""Initialize pause menu specific setup"""
 	super._initialize_menu()
 	
+	# Register with MenuManager
+	if MenuManager:
+		MenuManager.register_menu("pause_menu", self)
+	
 	# Configure title
 	_setup_title_elements()
 	
@@ -212,22 +216,26 @@ func _handle_open_settings() -> void:
 	if OS.is_debug_build():
 		print("Opening settings from pause menu...")
 	
-	# Navigate to settings menu (placeholder for now)
-	navigate_to_menu("settings_menu")
-	
-	# For now, just show a debug message
-	if has_node("/root/EventBus"):
-		var event_bus = get_node("/root/EventBus")
-		if event_bus.has_signal("debug_message"):
-			event_bus.debug_message.emit("Settings menu not yet implemented")
+	# Use MenuManager to open settings
+	if MenuManager:
+		MenuManager.open_menu("settings_menu", true)
+	else:
+		# Fallback to BaseMenu navigation
+		navigate_to_menu("settings_menu")
 
 func _handle_return_to_main_menu() -> void:
 	"""Handle main menu button press"""
 	if OS.is_debug_build():
 		print("Returning to main menu from pause...")
 	
-	# Close menu first (this will unpause the game)
-	close_menu(false)  # No animation for immediate transition
+	# Use MenuManager to close all menus and transition to main menu
+	if MenuManager:
+		MenuManager.close_all_menus(true)
+		# Wait a frame for menu closure
+		await get_tree().process_frame
+	else:
+		# Close menu first (this will unpause the game)
+		close_menu(false)  # No animation for immediate transition
 	
 	# Transition to main menu scene
 	SceneManager.change_scene("main_menu", SceneManager.TransitionType.FADE_BLACK)

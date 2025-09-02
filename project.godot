@@ -23,6 +23,7 @@ EventBus="*res://globals/event_bus.gd"
 GameManager="*res://globals/game_manager.gd"
 SceneManager="*res://globals/scene_manager.gd"
 AudioManager="*res://globals/audio_manager.gd"
+MenuManager="*res://globals/menu_manager.gd"
 
 [display]
 

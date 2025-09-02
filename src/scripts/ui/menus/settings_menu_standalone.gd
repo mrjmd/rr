@@ -48,6 +48,10 @@ func _ready() -> void:
 	layer = 225
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	
+	# Register with MenuManager
+	if MenuManager:
+		MenuManager.register_menu("settings_menu", self)
+	
 	# Initially hidden
 	visible = false
 	
@@ -326,7 +330,13 @@ func _on_vsync_toggled(button_pressed: bool) -> void:
 func _on_back_button_pressed() -> void:
 	"""Handle back button press"""
 	_save_settings()
-	close_settings()
+	
+	# Use MenuManager to go back
+	if MenuManager:
+		MenuManager.go_back()
+	else:
+		# Fallback to direct close
+		close_settings()
 
 # Public API
 
@@ -350,16 +360,27 @@ func close_settings() -> void:
 	if OS.is_debug_build():
 		print("Settings menu closed")
 
-func is_open() -> bool:
-	"""Check if settings menu is open"""
-	return visible
+# MenuManager-compatible methods
 
-# Input handling
+func open_menu(animate: bool = true) -> void:
+	"""MenuManager-compatible open method"""
+	open_settings()
+
+func close_menu(animate: bool = true) -> void:
+	"""MenuManager-compatible close method"""
+	close_settings()
+
+# Input handling for menu navigation
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible:
 		return
 	
+	# Handle ESC key to go back
 	if event.is_action_pressed("ui_cancel"):
-		close_settings()
+		_on_back_button_pressed()
 		get_viewport().set_input_as_handled()
+
+func is_open() -> bool:
+	"""Check if settings menu is open"""
+	return visible
