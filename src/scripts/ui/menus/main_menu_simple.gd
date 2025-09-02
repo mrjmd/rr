@@ -165,10 +165,9 @@ func _setup_panel_style(panel: Panel) -> void:
 # Button handlers
 func _on_start_button_pressed() -> void:
 	print("Start Game button pressed!")
-	# SceneManager integration will be added when running in game
-	# For now, just emit signal for testing
+	# Transition to kitchen POC scene
 	if get_node_or_null("/root/SceneManager"):
-		get_node("/root/SceneManager").change_scene("airport_montage", 0)
+		get_node("/root/SceneManager").change_scene("kitchen", 0)
 
 func _on_settings_button_pressed() -> void:
 	print("Settings button pressed!")

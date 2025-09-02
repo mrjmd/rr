@@ -171,9 +171,9 @@ func _handle_start_game() -> void:
 	# Close menu first
 	close_menu(false)  # No animation for immediate transition
 	
-	# Transition to first game scene
-	# Using the airport_montage scene as the first scene based on SceneManager
-	SceneManager.change_scene("airport_montage", SceneManager.TransitionType.FADE_BLACK)
+	# Transition to kitchen POC scene
+	# Using the kitchen scene for proof of concept testing
+	SceneManager.change_scene("kitchen", SceneManager.TransitionType.FADE_BLACK)
 
 func _handle_open_settings() -> void:
 	"""Handle settings button press"""

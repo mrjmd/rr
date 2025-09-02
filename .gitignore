@@ -63,3 +63,8 @@ user://
 
 # Claude specific (keep these)
 # .claude/
+
+# Temporary scripts and files
+temp/
+*.temp_script
+*.temp_test

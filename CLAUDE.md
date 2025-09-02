@@ -3,7 +3,8 @@
 ## 🚀 SESSION START PROTOCOL
 1. Read this CLAUDE.md file completely
 2. Read `.claude/todos/current.md` for current state
-3. Use agents for ALL implementation work
+3. Check `/planning/technical-specifications/mvp/scope.md` for current focus
+4. Use agents for ALL implementation work
 
 **Single Source of Truth**: `.claude/todos/current.md`
 
@@ -13,6 +14,34 @@
 3. Read the actual screenshots
 4. Fix what's broken
 5. Move on to real features
+
+## 📋 TECHNICAL SPECIFICATION PROTOCOL
+
+### BEFORE Writing Any Code
+1. **Check MVP Scope**: Is this feature in `/planning/technical-specifications/mvp/scope.md`?
+2. **Write Specification**: Use `/planning/technical-specifications/templates/system-template.md`
+3. **Reality Check**: Can you build this in less than a week?
+4. **Simplify**: What's the simplest version that could work?
+
+### Specification Requirements
+Every technical spec MUST include:
+- **Complexity Rating** (1-5, be honest)
+- **Time Estimate** (multiply by 3 for reality)
+- **MVP Status** (Is this actually needed now?)
+- **Success Criteria** (Concrete and testable)
+- **Simpler Alternatives** (What we're NOT building)
+
+### Red Flags to Avoid
+- "This system interacts with 5 other systems..." → TOO COMPLEX
+- "Depending on player's previous choices..." → NOT FOR MVP
+- "We'll need this eventually..." → BUILD IT LATER
+- "It would be cool if..." → NO
+
+### The MVP Focus
+**Current MVP**: Single scene, two meters, one core mechanic (baby + coffee)
+**Not MVP**: Multiple days, branching narratives, 5 meters, dream sequences
+
+If it's not making the core 30-second loop better, don't build it.
 
 ## 🚨 MANDATORY AGENT WORKFLOW - ENFORCED BY HOOKS
 **EVERY feature request MUST trigger:**
@@ -222,7 +251,18 @@ src/
 ├── resources/  # .tres files
 assets/         # sprites, audio, fonts
 testing/        # tests and screenshots
+temp/           # temporary scripts and files (NOT committed)
 ```
+
+### TEMP DIRECTORY USAGE
+**ALL temporary files MUST go in `/temp/` directory:**
+- Temporary test scripts
+- POC verification scripts  
+- One-off debug scripts
+- Agent handoff temporary files
+- Screenshots during debugging (move to testing/ when final)
+
+**NEVER put temporary files in project root!**
 
 ## ✅ DEFINITION OF DONE
 - [ ] Feature implemented via agents
@@ -262,16 +302,10 @@ testing/        # tests and screenshots
    # Press P
    cliclick kp:p
    ```
-3. **NO MORE STANDALONE SCRIPTS** - They don't work with --script
-4. **READ SCREENSHOTS** - Use Read tool on EVERY screenshot
-5. **VERIFY VISUALLY** - Check the actual screenshots
-
-### STOP DOING THIS SHIT:
-- Creating standalone test scripts that need --script
-- Making scripts that inherit from MainLoop/SceneTree
-- Writing new test harnesses when MenuVerifier EXISTS
-- FORGETTING ABOUT CLICLICK - YOU HAVE IT
-- THE GAME HAS F9 TESTING BUILT IN - USE IT WITH CLICLICK
+3. **PUT TEMP SCRIPTS IN /temp/** - Keep project root clean
+4. **NO MORE STANDALONE SCRIPTS** - They don't work with --script
+5. **READ SCREENSHOTS** - Use Read tool on EVERY screenshot
+6. **VERIFY VISUALLY** - Check the actual screenshots
 
 ### NO EXCUSES ACCEPTED FOR:
 - "Can't run in background" - Then DON'T run in background
